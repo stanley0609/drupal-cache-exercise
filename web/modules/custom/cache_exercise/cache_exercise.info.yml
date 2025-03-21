@@ -1,0 +1,7 @@
+name: 'Cache Exercise'
+type: module
+description: 'Displaying different caching techniques.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:node
