@@ -12,6 +12,7 @@ use Drupal\node\Entity\NodeType;
  * JSON:API integration test for the "EntityFormDisplay" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class EntityFormDisplayTest extends ConfigEntityResourceTestBase {
 
@@ -45,7 +46,7 @@ class EntityFormDisplayTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     $this->grantPermissionsToTestedRole(['administer node form display']);
   }
 
@@ -74,7 +75,7 @@ class EntityFormDisplayTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/entity_form_display/entity_form_display/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     return [
       'jsonapi' => [
@@ -173,7 +174,7 @@ class EntityFormDisplayTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
     return [];
   }
@@ -181,7 +182,7 @@ class EntityFormDisplayTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedUnauthorizedAccessMessage($method): string {
+  protected function getExpectedUnauthorizedAccessMessage($method) {
     return "The 'administer node form display' permission is required.";
   }
 

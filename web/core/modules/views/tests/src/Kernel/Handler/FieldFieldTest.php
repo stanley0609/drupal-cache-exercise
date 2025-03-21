@@ -333,9 +333,6 @@ class FieldFieldTest extends ViewsKernelTestBase {
    * different delta limit / offset.
    */
   public function testFieldAliasRender(): void {
-    $this->setUpCurrentUser(permissions: [
-      'view test entity',
-    ]);
     $executable = Views::getView('test_field_alias_test');
     $executable->execute();
 

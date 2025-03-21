@@ -15,14 +15,14 @@ class PathFieldDefinitionTest extends BaseFieldDefinitionTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPluginId(): string {
+  protected function getPluginId() {
     return 'path';
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getModuleAndPath(): array {
+  protected function getModuleAndPath() {
     return ['path', dirname(__DIR__, 4)];
   }
 

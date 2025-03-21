@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Code required only when fetching information about available updates.
  */
 
 use Drupal\update\UpdateManagerInterface;

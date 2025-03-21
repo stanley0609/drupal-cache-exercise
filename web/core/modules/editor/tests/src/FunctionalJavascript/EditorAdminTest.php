@@ -6,8 +6,6 @@ namespace Drupal\Tests\editor\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
-// cspell:ignore sulaco
-
 /**
  * @group editor
  */

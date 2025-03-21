@@ -5,8 +5,6 @@
  * Post update functions for the Workspace Update Test module.
  */
 
-declare(strict_types=1);
-
 /**
  * Checks the active workspace during database updates.
  */

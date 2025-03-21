@@ -49,7 +49,7 @@ class ShortcutTranslationUITest extends ContentTranslationUITestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getTranslatorPermissions(): array {
+  protected function getTranslatorPermissions() {
     return array_merge(parent::getTranslatorPermissions(), ['access shortcuts', 'administer shortcuts', 'access toolbar']);
   }
 
@@ -68,7 +68,7 @@ class ShortcutTranslationUITest extends ContentTranslationUITestBase {
     return ['title' => [['value' => $this->randomMachineName()]]] + parent::getNewEntityValues($langcode);
   }
 
-  protected function doTestBasicTranslation(): void {
+  protected function doTestBasicTranslation() {
     parent::doTestBasicTranslation();
 
     $storage = $this->container->get('entity_type.manager')
@@ -91,7 +91,7 @@ class ShortcutTranslationUITest extends ContentTranslationUITestBase {
   /**
    * {@inheritdoc}
    */
-  protected function doTestTranslationEdit(): void {
+  protected function doTestTranslationEdit() {
     $storage = $this->container->get('entity_type.manager')
       ->getStorage($this->entityTypeId);
     $storage->resetCache([$this->entityId]);
@@ -112,7 +112,7 @@ class ShortcutTranslationUITest extends ContentTranslationUITestBase {
   /**
    * Tests the basic translation workflow.
    */
-  protected function doTestTranslationChanged(): void {
+  protected function doTestTranslationChanged() {
     $storage = $this->container->get('entity_type.manager')
       ->getStorage($this->entityTypeId);
     $storage->resetCache([$this->entityId]);

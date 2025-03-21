@@ -170,7 +170,7 @@ class CacheContextsManagerTest extends UnitTestCase {
     $this->assertEquals($expected, $labels);
   }
 
-  protected function getContextsFixture(): array {
+  protected function getContextsFixture() {
     return ['foo', 'baz'];
   }
 

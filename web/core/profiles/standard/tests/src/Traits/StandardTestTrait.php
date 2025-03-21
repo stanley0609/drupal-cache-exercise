@@ -203,7 +203,7 @@ trait StandardTestTrait {
     $this->drupalGet($url);
     // Verify that site-wide contact page cannot be cached by Dynamic Page
     // Cache.
-    $this->assertSession()->responseHeaderEquals(DynamicPageCacheSubscriber::HEADER, 'UNCACHEABLE (poor cacheability)');
+    $this->assertSession()->responseHeaderEquals(DynamicPageCacheSubscriber::HEADER, 'UNCACHEABLE');
 
     $url = Url::fromRoute('<front>');
     $this->drupalGet($url);

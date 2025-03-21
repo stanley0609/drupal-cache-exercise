@@ -364,7 +364,7 @@ class NavigationMenuBlockTest extends KernelTestBase {
    * @return array
    *   The "menu link ID tree" representation of the given render array.
    */
-  protected function convertBuiltMenuToIdTree(array $build): array {
+  protected function convertBuiltMenuToIdTree(array $build) {
     $level = [];
     foreach (Element::children($build) as $id) {
       $level[$id] = [];

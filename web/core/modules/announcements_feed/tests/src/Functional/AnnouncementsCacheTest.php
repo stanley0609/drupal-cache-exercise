@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\announcements_feed\Functional;
 
+use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\dynamic_page_cache\EventSubscriber\DynamicPageCacheSubscriber;
 
@@ -25,7 +26,6 @@ final class AnnouncementsCacheTest extends BrowserTestBase {
   protected static $modules = [
     'announcements_feed',
     'dynamic_page_cache',
-    'node',
     'toolbar',
   ];
 
@@ -33,16 +33,14 @@ final class AnnouncementsCacheTest extends BrowserTestBase {
    * Tests dynamic page cache.
    */
   public function testDynamicPageCache(): void {
-    $node_type = $this->drupalCreateContentType();
-    $node = $this->drupalCreateNode(['type' => $node_type->id()]);
     $this->drupalLogin($this->drupalCreateUser([
       'access toolbar',
       'access announcements',
     ]));
-    $this->drupalGet($node->toUrl());
+    // Front-page is visited right after login.
     $this->assertSession()->responseHeaderEquals(DynamicPageCacheSubscriber::HEADER, 'MISS');
     // Reload the page, it should be cached now.
-    $this->drupalGet($node->toUrl());
+    $this->drupalGet(Url::fromRoute('<front>'));
     $this->assertSession()->elementExists('css', '[data-drupal-announce-trigger]');
     $this->assertSession()->responseHeaderEquals(DynamicPageCacheSubscriber::HEADER, 'HIT');
   }

@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Admin page callbacks for the system module.
  */
 
 use Drupal\Component\Utility\Html;
@@ -25,7 +26,7 @@ use Drupal\Core\Url;
  *     - description: Description of the administrative menu item.
  *     - options: URL options. See \Drupal\Core\Url::fromUri() for details.
  */
-function template_preprocess_admin_block_content(&$variables): void {
+function template_preprocess_admin_block_content(&$variables) {
   if (!empty($variables['content'])) {
     $variables['compact'] = system_admin_compact_mode();
     foreach ($variables['content'] as $key => $item) {
@@ -52,7 +53,7 @@ function template_preprocess_admin_block_content(&$variables): void {
  *     will control which container it will be in. This is usually 'left' or
  *     'right'.
  */
-function template_preprocess_admin_page(&$variables): void {
+function template_preprocess_admin_page(&$variables) {
   $variables['system_compact_link'] = [
     '#type' => 'system_compact_link',
   ];
@@ -81,7 +82,7 @@ function template_preprocess_admin_page(&$variables): void {
  *   An associative array containing:
  *   - menu_items: An array of modules to be displayed.
  */
-function template_preprocess_system_admin_index(&$variables): void {
+function template_preprocess_system_admin_index(&$variables) {
   $variables['system_compact_link'] = [
     '#type' => 'system_compact_link',
   ];
@@ -131,7 +132,7 @@ function template_preprocess_system_admin_index(&$variables): void {
  *
  * @see \Drupal\system\Form\ModulesListForm
  */
-function template_preprocess_system_modules_details(&$variables): void {
+function template_preprocess_system_modules_details(&$variables) {
   $form = $variables['form'];
 
   // Identify modules that are depended on by themes.
@@ -219,7 +220,7 @@ function template_preprocess_system_modules_details(&$variables): void {
  *
  * @ingroup themeable
  */
-function template_preprocess_system_modules_uninstall(&$variables): void {
+function template_preprocess_system_modules_uninstall(&$variables) {
   $form = $variables['form'];
   $variables['modules'] = [];
 
@@ -256,7 +257,7 @@ function template_preprocess_system_modules_uninstall(&$variables): void {
  *   - theme_groups: An associative array containing groups of themes.
  *   - theme_group_titles: An associative array containing titles of themes.
  */
-function template_preprocess_system_themes_page(&$variables): void {
+function template_preprocess_system_themes_page(&$variables) {
   $groups = [];
   $theme_groups = $variables['theme_groups'];
   $variables['attributes']['id'] = 'system-themes-page';

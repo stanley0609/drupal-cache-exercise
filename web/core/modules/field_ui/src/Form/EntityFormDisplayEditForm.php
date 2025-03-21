@@ -96,10 +96,6 @@ class EntityFormDisplayEditForm extends EntityDisplayFormBase {
   protected function getTableHeader() {
     return [
       $this->t('Field'),
-      [
-        'data' => $this->t('Machine name'),
-        'class' => [RESPONSIVE_PRIORITY_MEDIUM, 'machine-name'],
-      ],
       $this->t('Weight'),
       $this->t('Parent'),
       $this->t('Region'),

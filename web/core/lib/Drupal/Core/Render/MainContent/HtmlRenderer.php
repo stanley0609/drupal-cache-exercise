@@ -75,9 +75,9 @@ class HtmlRenderer implements MainContentRendererInterface {
   /**
    * The renderer configuration array.
    *
-   * @var array
-   *
    * @see sites/default/default.services.yml
+   *
+   * @var array
    */
   protected $rendererConfig;
 

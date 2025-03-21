@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Administrative page callbacks for the Database Logging module.
  */
 
 use Drupal\Core\Logger\RfcLogLevel;

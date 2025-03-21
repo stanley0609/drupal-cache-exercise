@@ -47,9 +47,9 @@ final class ImportStorageTransformer {
   /**
    * The persistent lock which the config importer uses across requests.
    *
-   * @var \Drupal\Core\Lock\LockBackendInterface
-   *
    * @see \Drupal\Core\Config\ConfigImporter::alreadyImporting()
+   *
+   * @var \Drupal\Core\Lock\LockBackendInterface
    */
   protected $persistentLock;
 

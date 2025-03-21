@@ -18,17 +18,17 @@ abstract class CacheTestBase extends BrowserTestBase {
   /**
    * Checks whether or not a cache entry exists.
    *
-   * @param string $cid
+   * @param $cid
    *   The cache id.
-   * @param mixed $var
+   * @param $var
    *   The variable the cache should contain.
-   * @param string|null $bin
+   * @param $bin
    *   The bin the cache item was stored in.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function checkCacheExists($cid, $var, $bin = NULL): bool {
+  protected function checkCacheExists($cid, $var, $bin = NULL) {
     if ($bin == NULL) {
       $bin = $this->defaultBin;
     }
@@ -41,13 +41,13 @@ abstract class CacheTestBase extends BrowserTestBase {
   /**
    * Asserts that a cache entry exists.
    *
-   * @param string $message
+   * @param $message
    *   Message to display.
-   * @param string|null $var
+   * @param $var
    *   The variable the cache should contain.
-   * @param string|null $cid
+   * @param $cid
    *   The cache id.
-   * @param string|null $bin
+   * @param $bin
    *   The bin the cache item was stored in.
    */
   protected function assertCacheExists($message, $var = NULL, $cid = NULL, $bin = NULL) {
@@ -67,11 +67,11 @@ abstract class CacheTestBase extends BrowserTestBase {
   /**
    * Asserts that a cache entry has been removed.
    *
-   * @param string $message
+   * @param $message
    *   Message to display.
-   * @param string|null $cid
+   * @param $cid
    *   The cache id.
-   * @param string|null $bin
+   * @param $bin
    *   The bin the cache item was stored in.
    */
   public function assertCacheRemoved($message, $cid = NULL, $bin = NULL) {

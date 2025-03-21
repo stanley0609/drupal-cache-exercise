@@ -17,9 +17,9 @@ class NodeTypeListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['title'] = $this->t('Name');
+    $header['title'] = t('Name');
     $header['description'] = [
-      'data' => $this->t('Description'),
+      'data' => t('Description'),
       'class' => [RESPONSIVE_PRIORITY_MEDIUM],
     ];
     return $header + parent::buildHeader();

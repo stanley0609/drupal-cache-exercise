@@ -24,7 +24,7 @@ trait BlockCreationTrait {
    *   example:
    *   @code
    *     $this->drupalPlaceBlock('system_powered_by_block', [
-   *       'label' => 'Hello, world!',
+   *       'label' => t('Hello, world!'),
    *     ]);
    *   @endcode
    *   The following defaults are provided:

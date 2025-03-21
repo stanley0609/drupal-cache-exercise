@@ -13,6 +13,7 @@ use Drupal\Tests\user\Traits\UserCreationTrait;
  * Tests the media access control handler.
  *
  * @group media
+ * @group #slow
  *
  * @coversDefaultClass \Drupal\media\MediaAccessControlHandler
  */

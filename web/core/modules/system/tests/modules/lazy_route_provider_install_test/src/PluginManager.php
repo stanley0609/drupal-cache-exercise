@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\lazy_route_provider_install_test;
 
 use Drupal\Component\Annotation\PluginID;

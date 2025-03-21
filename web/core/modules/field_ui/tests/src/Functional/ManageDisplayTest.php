@@ -19,6 +19,7 @@ use Drupal\Tests\field_ui\Traits\FieldUiTestTrait;
  * Tests the Field UI "Manage display" and "Manage form display" screens.
  *
  * @group field_ui
+ * @group #slow
  */
 class ManageDisplayTest extends BrowserTestBase {
 
@@ -70,7 +71,6 @@ class ManageDisplayTest extends BrowserTestBase {
       'administer node display',
       'administer taxonomy',
       'administer taxonomy_term fields',
-      'administer taxonomy_term form display',
       'administer taxonomy_term display',
       'administer users',
       'administer account settings',
@@ -203,16 +203,9 @@ class ManageDisplayTest extends BrowserTestBase {
   }
 
   /**
-   * Tests view mode management screens.
+   * Tests hiding the view modes fieldset when there's only one available.
    */
-  public function testViewModeUi(): void {
-    // Tests table headers on "Manage form" and "Manage display" screens.
-    $this->drupalGet('admin/structure/taxonomy/manage/' . $this->vocabulary . '/overview/form-display');
-    $this->assertTableHeaderExistsByLabel('field-display-overview', 'Machine name');
-    $this->drupalGet('admin/structure/taxonomy/manage/' . $this->vocabulary . '/overview/display');
-    $this->assertTableHeaderExistsByLabel('field-display-overview', 'Machine name');
-
-    // Tests hiding the view modes fieldset when there's only one available.
+  public function testSingleViewMode(): void {
     $this->drupalGet('admin/structure/taxonomy/manage/' . $this->vocabulary . '/display');
     $this->assertSession()->pageTextNotContains('Use custom display settings for the following view modes');
 
@@ -398,7 +391,7 @@ class ManageDisplayTest extends BrowserTestBase {
    * @return array
    *   An array of option values as strings.
    */
-  protected function getAllOptionsList(NodeElement $element): array {
+  protected function getAllOptionsList(NodeElement $element) {
     $options = [];
     // Add all options items.
     foreach ($element->option as $option) {

@@ -23,7 +23,6 @@ abstract class ConfigFormTestBase extends KernelTestBase {
   /**
    * Values to use for testing.
    *
-   * @var array
    * Contains details for form key, configuration object name, and config key.
    * Example:
    * @code
@@ -35,6 +34,8 @@ abstract class ConfigFormTestBase extends KernelTestBase {
    *     ],
    *   ];
    * @endcode
+   *
+   * @var array
    */
   protected $values;
 

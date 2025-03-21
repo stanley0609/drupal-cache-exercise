@@ -10,6 +10,7 @@ use Drupal\user_auth_decorator_test\UserAuthDecorator;
  * Run UserJsonBasicAuthTest with a user.auth decorator.
  *
  * @group rest
+ * @group #slow
  */
 class UserJsonBasicAuthDecoratedTest extends UserJsonBasicAuthTest {
   /**

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\config_import_test;
 
 use Drupal\Core\Config\ConfigCrudEvent;

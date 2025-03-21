@@ -14,7 +14,7 @@ trait CreateTestContentEntitiesTrait {
    *
    * @return array
    */
-  protected function getRequiredModules(): array {
+  protected function getRequiredModules() {
     return [
       'block_content',
       'comment',

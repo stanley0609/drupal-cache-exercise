@@ -874,15 +874,13 @@ class AccessResultTest extends UnitTestCase {
   }
 
   /**
-   * Tests orIf().
+   * @covers ::orIf
    *
    * Tests the special case of ORing non-forbidden access results that are both
    * cacheable but have different cacheability metadata.
    * This is only the case for non-forbidden access results; we still abort the
    * ORing process as soon as a forbidden access result is encountered. This is
    * tested in ::testOrIf().
-   *
-   * @covers ::orIf
    */
   public function testOrIfCacheabilityMerging(): void {
     $merge_both_directions = function (AccessResult $a, AccessResult $b) {

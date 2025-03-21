@@ -49,7 +49,7 @@ class MigrationProvidersExistTest extends MigrateDrupalTestBase {
   /**
    * Enable all available modules.
    */
-  protected function enableAllModules(): void {
+  protected function enableAllModules() {
     // Install all available modules.
     $module_handler = $this->container->get('module_handler');
     $modules = $this->coreModuleListDataProvider();

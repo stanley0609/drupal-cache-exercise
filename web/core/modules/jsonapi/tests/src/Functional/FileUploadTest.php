@@ -24,6 +24,7 @@ use Psr\Http\Message\ResponseInterface;
  * Tests binary data file upload route.
  *
  * @group jsonapi
+ * @group #slow
  */
 class FileUploadTest extends ResourceTestBase {
 
@@ -338,7 +339,7 @@ class FileUploadTest extends ResourceTestBase {
    * @see ::testPostFileUpload()
    * @see \Drupal\Tests\jsonapi\Functional\EntityTestTest::getPostDocument()
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     return [
       'data' => [
         'type' => 'entity_test--entity_test',
@@ -363,7 +364,7 @@ class FileUploadTest extends ResourceTestBase {
   /**
    * Tests using the file upload POST route with invalid headers.
    */
-  protected function testPostFileUploadInvalidHeaders(): void {
+  protected function testPostFileUploadInvalidHeaders() {
     $uri = Url::fromUri('base:' . static::$postUri);
 
     // The wrong content type header should return a 415 code.
@@ -541,7 +542,7 @@ class FileUploadTest extends ResourceTestBase {
   /**
    * Tests using the file upload route with an invalid file type.
    */
-  protected function testFileUploadInvalidFileType(): void {
+  protected function testFileUploadInvalidFileType() {
     $uri = Url::fromUri('base:' . static::$postUri);
 
     // Test with a JSON file.
@@ -556,7 +557,7 @@ class FileUploadTest extends ResourceTestBase {
   /**
    * Tests using the file upload route with a file size larger than allowed.
    */
-  protected function testFileUploadLargerFileSize(): void {
+  protected function testFileUploadLargerFileSize() {
     // Set a limit of 50 bytes.
     $this->field->setSetting('max_filesize', 50)
       ->save();
@@ -575,7 +576,7 @@ class FileUploadTest extends ResourceTestBase {
   /**
    * Tests using the file upload POST route with malicious extensions.
    */
-  protected function testFileUploadMaliciousExtension(): void {
+  protected function testFileUploadMaliciousExtension() {
     // Allow all file uploads but system.file::allow_insecure_uploads is set to
     // FALSE.
     $this->field->setSetting('file_extensions', '')->save();
@@ -721,7 +722,7 @@ class FileUploadTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedUnauthorizedAccessMessage($method): string {
+  protected function getExpectedUnauthorizedAccessMessage($method) {
     switch ($method) {
       case 'GET':
         return "The current user is not allowed to view this relationship. The 'view test entity' permission is required.";
@@ -750,7 +751,7 @@ class FileUploadTest extends ResourceTestBase {
    * @return array
    *   A JSON:API response document.
    */
-  protected function getExpectedDocument($fid = 1, $expected_filename = 'example.txt', $expected_as_filename = FALSE, $expected_status = FALSE): array {
+  protected function getExpectedDocument($fid = 1, $expected_filename = 'example.txt', $expected_as_filename = FALSE, $expected_status = FALSE) {
     $author = User::load($this->account->id());
     $file = File::load($fid);
     $this->assertInstanceOf(File::class, $file);
@@ -824,7 +825,7 @@ class FileUploadTest extends ResourceTestBase {
    *
    * @see \GuzzleHttp\ClientInterface::request()
    */
-  protected function fileRequest(Url $url, $file_contents, array $headers = []): ResponseInterface {
+  protected function fileRequest(Url $url, $file_contents, array $headers = []) {
     $request_options = [];
     $headers = $headers + [
       // Set the required (and only accepted) content type for the request.
@@ -846,7 +847,7 @@ class FileUploadTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     switch ($method) {
       case 'GET':
         $this->grantPermissionsToTestedRole(['view test entity']);

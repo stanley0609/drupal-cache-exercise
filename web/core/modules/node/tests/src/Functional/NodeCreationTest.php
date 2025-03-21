@@ -13,6 +13,7 @@ use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
  * Create a node and test saving it.
  *
  * @group node
+ * @group #slow
  */
 class NodeCreationTest extends NodeTestBase {
 
@@ -141,7 +142,7 @@ class NodeCreationTest extends NodeTestBase {
       Node::create($edit)->save();
       $this->fail('Expected exception has not been thrown.');
     }
-    catch (\Exception) {
+    catch (\Exception $e) {
       // Expected exception; just continue testing.
     }
 
@@ -316,7 +317,7 @@ class NodeCreationTest extends NodeTestBase {
    *   Array containing the IDs of the log records with the rollback exception
    *   message.
    */
-  protected static function getWatchdogIdsForTestExceptionRollback(): array {
+  protected static function getWatchdogIdsForTestExceptionRollback() {
     // PostgreSQL doesn't support bytea LIKE queries, so we need to unserialize
     // first to check for the rollback exception message.
     $matches = [];

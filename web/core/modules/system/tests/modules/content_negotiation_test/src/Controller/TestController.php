@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\content_negotiation_test\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;

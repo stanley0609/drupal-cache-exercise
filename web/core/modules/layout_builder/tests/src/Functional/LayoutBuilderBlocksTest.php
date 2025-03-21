@@ -13,6 +13,7 @@ use Drupal\views\Entity\View;
  * Tests the Layout Builder UI with blocks.
  *
  * @group layout_builder
+ * @group #slow
  */
 class LayoutBuilderBlocksTest extends LayoutBuilderTestBase {
 

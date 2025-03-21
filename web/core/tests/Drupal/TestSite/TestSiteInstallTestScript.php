@@ -7,7 +7,7 @@ namespace Drupal\TestSite;
 /**
  * Setup file used by TestSiteApplicationTest.
  *
- * @see \Drupal\KernelTests\Scripts\TestSiteApplicationTest
+ * @see \Drupal\Tests\Scripts\TestSiteApplicationTest
  */
 class TestSiteInstallTestScript implements TestSetupInterface {
 

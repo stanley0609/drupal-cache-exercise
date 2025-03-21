@@ -26,10 +26,3 @@ function navigation_post_update_update_permissions(array &$sandbox) {
     return $needs_save;
   });
 }
-
-/**
- * Defines the values for the default logo dimensions.
- */
-function navigation_post_update_set_logo_dimensions_default(array &$sandbox) {
-  // Empty post_update hook.
-}

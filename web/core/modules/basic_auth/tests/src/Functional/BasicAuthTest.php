@@ -53,7 +53,7 @@ class BasicAuthTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains($account->getAccountName());
     $this->assertSession()->statusCodeEquals(200);
     $this->mink->resetSessions();
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Cache', 'UNCACHEABLE (request policy)');
+    $this->assertSession()->responseHeaderDoesNotExist('X-Drupal-Cache');
     // Check that Cache-Control is not set to public.
     $this->assertSession()->responseHeaderNotContains('Cache-Control', 'public');
 
@@ -87,7 +87,7 @@ class BasicAuthTest extends BrowserTestBase {
     $this->drupalGet($url);
     $this->assertSession()->responseHeaderEquals('X-Drupal-Cache', 'MISS');
     $this->basicAuthGet($url, $account->getAccountName(), $account->pass_raw);
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Cache', 'UNCACHEABLE (request policy)');
+    $this->assertSession()->responseHeaderDoesNotExist('X-Drupal-Cache');
     // Check that Cache-Control is not set to public.
     $this->assertSession()->responseHeaderNotContains('Cache-Control', 'public');
   }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\render_array_non_html_subscriber_test;
 
 use Drupal\Core\Controller\ControllerBase;

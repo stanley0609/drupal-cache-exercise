@@ -20,8 +20,6 @@ use Drupal\Core\TypedData\Plugin\DataType\StringData;
 use Drupal\Core\TypedData\TypedDataManagerInterface;
 use Drupal\KernelTests\KernelTestBase;
 
-// cspell:ignore sisko
-
 /**
  * @coversDefaultClass \Drupal\Core\Plugin\ContextAwarePluginTrait
  *
@@ -119,7 +117,7 @@ class TestContextAwarePlugin extends PluginBase implements ContextAwarePluginInt
   /**
    * {@inheritdoc}
    */
-  public function setContext($name, ComponentContextInterface $context): void {
+  public function setContext($name, ComponentContextInterface $context) {
     $this->setContextTrait($name, $context);
     $this->setContextCalled = TRUE;
   }

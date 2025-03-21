@@ -5,8 +5,6 @@
  * Include file for test module.
  */
 
-declare(strict_types=1);
-
 /**
  * Implements hook_altered_test_hook().
  *

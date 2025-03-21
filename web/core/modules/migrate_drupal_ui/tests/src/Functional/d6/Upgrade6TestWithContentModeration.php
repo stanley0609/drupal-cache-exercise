@@ -54,7 +54,7 @@ class Upgrade6TestWithContentModeration extends Upgrade6Test {
   /**
    * {@inheritdoc}
    */
-  protected function getEntityCounts(): array {
+  protected function getEntityCounts() {
     $entity_counts = parent::getEntityCounts() + [
       'content_moderation_state' => 17,
       'workflow' => 1,

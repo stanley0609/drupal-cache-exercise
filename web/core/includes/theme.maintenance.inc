@@ -46,7 +46,7 @@ function _drupal_maintenance_theme() {
         $custom_theme = $config->get('default');
       }
     }
-    catch (\Exception) {
+    catch (\Exception $e) {
       // Whatever went wrong (often a database connection problem), we are
       // about to fall back to a sensible theme so there is no need for special
       // handling.
@@ -108,7 +108,7 @@ function _drupal_maintenance_theme() {
  *   An associative array containing:
  *   - messages: An array of result messages.
  */
-function template_preprocess_authorize_report(&$variables): void {
+function template_preprocess_authorize_report(&$variables) {
   $messages = [];
   if (!empty($variables['messages'])) {
     foreach ($variables['messages'] as $heading => $logs) {

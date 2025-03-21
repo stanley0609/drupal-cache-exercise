@@ -14,6 +14,7 @@ use Drupal\language\Entity\ConfigurableLanguage;
  * Tests the pluggable pager system.
  *
  * @group views
+ * @group #slow
  */
 class PagerTest extends ViewTestBase {
 

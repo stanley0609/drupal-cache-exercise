@@ -73,7 +73,7 @@ function update_requirements($phase) {
 /**
  * Implements hook_install().
  */
-function update_install(): void {
+function update_install() {
   $queue = \Drupal::queue('update_fetch_tasks', TRUE);
   $queue->createQueue();
 }
@@ -81,7 +81,7 @@ function update_install(): void {
 /**
  * Implements hook_uninstall().
  */
-function update_uninstall(): void {
+function update_uninstall() {
   \Drupal::state()->delete('update.last_check');
   \Drupal::state()->delete('update.last_email_notification');
 
@@ -172,6 +172,6 @@ function _update_requirement_check($project, $type) {
 /**
  * Implements hook_update_last_removed().
  */
-function update_update_last_removed(): int {
+function update_update_last_removed() {
   return 8001;
 }

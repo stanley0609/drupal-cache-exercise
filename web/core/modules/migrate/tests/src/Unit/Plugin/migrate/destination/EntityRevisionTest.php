@@ -102,7 +102,7 @@ class EntityRevisionTestDestination extends EntityRevision {
 
   private $entity = NULL;
 
-  public function setEntity($entity): void {
+  public function setEntity($entity) {
     $this->entity = $entity;
   }
 

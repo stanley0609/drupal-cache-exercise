@@ -146,7 +146,7 @@ abstract class ConfigStorageTestBase extends KernelTestBase {
       $this->invalidStorage->delete($name);
       $this->fail('Exception not thrown upon deleting from a non-existing storage bin.');
     }
-    catch (\Exception) {
+    catch (\Exception $e) {
       // An exception occurred as expected; just continue.
     }
 

@@ -14,6 +14,7 @@ use Drupal\workspaces\Entity\Workspace;
  * JSON:API integration test for the "Workspace" content entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class WorkspaceTest extends ResourceTestBase {
 

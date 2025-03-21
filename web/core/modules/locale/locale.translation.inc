@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Common API for interface translation.
  */
 
 use Drupal\Core\StreamWrapper\StreamWrapperManager;

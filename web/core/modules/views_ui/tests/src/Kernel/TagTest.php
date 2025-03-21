@@ -13,6 +13,7 @@ use Drupal\views\Entity\View;
  * Tests the views ui tagging functionality.
  *
  * @group views_ui
+ * @group #slow
  */
 class TagTest extends ViewsKernelTestBase {
 

@@ -2,6 +2,7 @@
 
 namespace Drupal\Core\Database\Query;
 
+use Drupal\Core\Database\Database;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Database\IntegrityConstraintViolationException;
 
@@ -103,8 +104,6 @@ class Merge extends Query implements ConditionInterface {
   /**
    * Array of fields to update to an expression in case of a duplicate record.
    *
-   * @var array
-   *
    * This variable is a nested array in the following format:
    * @code
    * <some field> => [
@@ -112,6 +111,8 @@ class Merge extends Query implements ConditionInterface {
    *  'arguments' => <array of arguments for condition, or NULL for none>,
    * ];
    * @endcode
+   *
+   * @var array
    */
   protected $expressionFields = [];
 
@@ -133,6 +134,9 @@ class Merge extends Query implements ConditionInterface {
    *   Array of database options.
    */
   public function __construct(Connection $connection, $table, array $options = []) {
+    // @todo Remove $options['return'] in Drupal 11.
+    // @see https://www.drupal.org/project/drupal/issues/3256524
+    $options['return'] = Database::RETURN_AFFECTED;
     parent::__construct($connection, $options);
     $this->table = $table;
     $this->conditionTable = $table;
@@ -327,18 +331,27 @@ class Merge extends Query implements ConditionInterface {
    * @see \Drupal\Core\Database\Query\Merge::keys()
    */
   public function key($field, $value = NULL) {
-    assert(is_string($field));
-    $this->keys([$field => $value]);
+    // @todo D9: Remove this backwards-compatibility shim.
+    if (is_array($field)) {
+      @trigger_error("Passing an array to the \$field argument of " . __METHOD__ . '() is deprecated in drupal:10.2.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/2205327', E_USER_DEPRECATED);
+      $this->keys($field, $value ?? []);
+    }
+    else {
+      $this->keys([$field => $value]);
+    }
     return $this;
   }
 
   /**
-   * {@inheritdoc}
+   * Implements PHP magic __toString method to convert the query to a string.
+   *
+   * In the degenerate case, there is no string-able query as this operation
+   * is potentially two queries.
+   *
+   * @return string
+   *   The prepared query statement.
    */
   public function __toString() {
-    // In the degenerate case, there is no string-able query as this operation
-    // is potentially two queries.
-    throw new \BadMethodCallException('The merge query can not be converted to a string');
   }
 
   /**

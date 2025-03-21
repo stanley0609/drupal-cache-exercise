@@ -7,7 +7,7 @@ module.exports.assertion = function () {
     const deprecationMessages =
       sessionStorageEntries !== null
         ? sessionStorageEntries.filter((message) =>
-            message.includes('[Deprecation]'),
+            new RegExp('[Deprecation]').test(message),
           )
         : [];
 
@@ -17,11 +17,7 @@ module.exports.assertion = function () {
   };
   this.command = (callback) =>
     // eslint-disable-next-line prefer-arrow-callback
-    this.api.execute(
-      function () {
-        return window.sessionStorage.getItem('js_testing_log_test.warnings');
-      },
-      [],
-      callback,
-    );
+    this.api.execute(function () {
+      return window.sessionStorage.getItem('js_testing_log_test.warnings');
+    }, callback);
 };

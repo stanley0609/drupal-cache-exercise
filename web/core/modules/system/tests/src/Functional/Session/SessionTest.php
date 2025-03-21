@@ -11,6 +11,7 @@ use Drupal\Tests\BrowserTestBase;
  * Drupal session handling tests.
  *
  * @group Session
+ * @group #slow
  */
 class SessionTest extends BrowserTestBase {
 
@@ -216,7 +217,7 @@ class SessionTest extends BrowserTestBase {
     $this->assertSessionCookie(FALSE);
     $this->assertSessionEmpty(FALSE);
     // Verify that caching was bypassed.
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Cache', 'UNCACHEABLE (request policy)');
+    $this->assertSession()->responseHeaderDoesNotExist('X-Drupal-Cache');
     $this->assertSession()->pageTextContains('This is a dummy message.');
     // Verify that session cookie was deleted.
     $this->assertSession()->responseHeaderMatches('Set-Cookie', '/SESS\w+=deleted/');
@@ -375,7 +376,7 @@ class SessionTest extends BrowserTestBase {
   /**
    * Reset the cookie file so that it refers to the specified user.
    */
-  public function sessionReset(): void {
+  public function sessionReset() {
     // Close the internal browser.
     $this->mink->resetSessions();
     $this->loggedInUser = FALSE;

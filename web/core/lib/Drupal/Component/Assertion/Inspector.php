@@ -19,6 +19,25 @@ namespace Drupal\Component\Assertion;
 class Inspector {
 
   /**
+   * Asserts argument can be traversed with foreach.
+   *
+   * @param mixed $traversable
+   *   Variable to be examined.
+   *
+   * @return bool
+   *   TRUE if $traversable can be traversed with foreach.
+   *
+   * @deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. Use
+   *   is_iterable() instead.
+   *
+   * @see https://www.drupal.org/node/3422775
+   */
+  public static function assertTraversable($traversable) {
+    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. Use is_iterable() instead. See https://www.drupal.org/node/3422775', E_USER_DEPRECATED);
+    return is_iterable($traversable);
+  }
+
+  /**
    * Asserts callback returns TRUE for each member of a traversable.
    *
    * This is less memory intensive than using array_filter() to build a second
@@ -184,7 +203,7 @@ class Inspector {
    *
    * @param mixed $traversable
    *   Variable to be examined.
-   * @param ...$keys
+   * @param string ...
    *   Keys to be searched for.
    *
    * @return bool
@@ -370,7 +389,7 @@ class Inspector {
    *
    * @param mixed $traversable
    *   Variable to be examined.
-   * @param ...$classes
+   * @param string ...
    *   Classes and interfaces to test objects against.
    *
    * @return bool

@@ -10,8 +10,6 @@ use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\field_ui\Traits\FieldUiJSTestTrait;
 use Drupal\Tests\field_ui\Traits\FieldUiTestTrait;
 
-// cspell:ignore onewidgetfield
-
 /**
  * Tests the Field UI "Manage display" and "Manage form display" screens.
  *

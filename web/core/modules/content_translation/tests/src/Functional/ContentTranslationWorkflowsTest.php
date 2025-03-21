@@ -115,7 +115,7 @@ class ContentTranslationWorkflowsTest extends ContentTranslationTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setupUsers(): void {
+  protected function setupUsers() {
     $this->entityOwner = $this->drupalCreateUser($this->getEntityOwnerPermissions(), 'entity_owner');
     $this->notEntityOwner = $this->drupalCreateUser();
     $this->notEntityOwner->set('roles', $this->entityOwner->getRoles(TRUE));
@@ -126,7 +126,7 @@ class ContentTranslationWorkflowsTest extends ContentTranslationTestBase {
   /**
    * Returns an array of permissions needed for the entity owner.
    */
-  protected function getEntityOwnerPermissions(): array {
+  protected function getEntityOwnerPermissions() {
     return ['edit own entity_test content', 'translate editable entities', 'view test entity', 'view test entity translations', 'view unpublished test entity translations'];
   }
 
@@ -145,7 +145,7 @@ class ContentTranslationWorkflowsTest extends ContentTranslationTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEditorPermissions(): array {
+  protected function getEditorPermissions() {
     return ['administer entity_test content', 'view test entity', 'view test entity translations'];
   }
 
@@ -155,7 +155,7 @@ class ContentTranslationWorkflowsTest extends ContentTranslationTestBase {
    * @param \Drupal\User\UserInterface|null $user
    *   (optional) The entity owner.
    */
-  protected function setupEntity(?UserInterface $user = NULL): void {
+  protected function setupEntity(?UserInterface $user = NULL) {
     $default_langcode = $this->langcodes[0];
 
     // Create a test entity.
@@ -307,7 +307,7 @@ class ContentTranslationWorkflowsTest extends ContentTranslationTestBase {
    *   The an associative array with the operation name as key and the expected
    *   status as value.
    */
-  protected function doTestWorkflows(UserInterface $user, $expected_status): void {
+  protected function doTestWorkflows(UserInterface $user, $expected_status) {
     $default_langcode = $this->langcodes[0];
     $languages = $this->container->get('language_manager')->getLanguages();
     $options = ['language' => $languages[$default_langcode], 'absolute' => TRUE];

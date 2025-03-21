@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\views_test_modal\Controller;
 
 use Drupal\Component\Serialization\Json;

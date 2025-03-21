@@ -9,7 +9,7 @@ namespace Drupal\FunctionalTests\Installer;
  *
  * @group Installer
  */
-class InstallerExistingConfigNoConfigTest extends InstallerConfigDirectoryTestBase {
+class InstallerExistingConfigNoConfigTest extends InstallerExistingConfigTestBase {
 
   /**
    * {@inheritdoc}
@@ -21,15 +21,15 @@ class InstallerExistingConfigNoConfigTest extends InstallerConfigDirectoryTestBa
   /**
    * Final installer step: Configure site.
    */
-  protected function setUpSite(): void {
+  protected function setUpSite() {
     // There are errors therefore there is nothing to do here.
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getConfigLocation(): string {
-    return __DIR__ . '/../../../fixtures/config_install/testing_config_install_no_config';
+  protected function getConfigTarball() {
+    return __DIR__ . '/../../../fixtures/config_install/testing_config_install_no_config.tar.gz';
   }
 
   /**

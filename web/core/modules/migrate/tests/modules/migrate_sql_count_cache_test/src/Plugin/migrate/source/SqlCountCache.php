@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\migrate_sql_count_cache_test\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;

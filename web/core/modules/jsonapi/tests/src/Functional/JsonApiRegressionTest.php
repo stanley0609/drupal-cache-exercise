@@ -27,6 +27,7 @@ use GuzzleHttp\RequestOptions;
  * JSON:API regression tests.
  *
  * @group jsonapi
+ * @group #slow
  *
  * @internal
  */
@@ -55,7 +56,7 @@ class JsonApiRegressionTest extends JsonApiFunctionalTestBase {
     // Set up data model.
     $this->assertTrue($this->container->get('module_installer')->install(['comment'], TRUE), 'Installed modules.');
     $this->addDefaultCommentField('node', 'article');
-    $this->addDefaultCommentField('taxonomy_term', 'tags', 'comment', CommentItemInterface::OPEN, 'test_comment_type');
+    $this->addDefaultCommentField('taxonomy_term', 'tags', 'comment', CommentItemInterface::OPEN, 'tcomment');
     $this->drupalCreateContentType(['type' => 'page']);
     $this->createEntityReferenceField(
       'node',
@@ -67,7 +68,7 @@ class JsonApiRegressionTest extends JsonApiFunctionalTestBase {
       [
         'target_bundles' => [
           'comment' => 'comment',
-          'test_comment_type' => 'test_comment_type',
+          'tcomment' => 'tcomment',
         ],
       ],
       FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED

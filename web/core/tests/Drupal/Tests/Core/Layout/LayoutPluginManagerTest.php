@@ -382,7 +382,7 @@ EOS;
   /**
    * Sets up the filesystem with YAML files and annotated plugins.
    */
-  protected function setUpFilesystem(): void {
+  protected function setUpFilesystem() {
     $module_a_provided_layout = <<<'EOS'
 module_a_provided_layout:
   label: 1 column layout

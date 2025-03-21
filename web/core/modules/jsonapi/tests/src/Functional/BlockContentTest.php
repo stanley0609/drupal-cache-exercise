@@ -14,6 +14,7 @@ use Drupal\Tests\jsonapi\Traits\CommonCollectionFilterAccessTestPatternsTrait;
  * JSON:API integration test for the "BlockContent" content entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class BlockContentTest extends ResourceTestBase {
 
@@ -66,7 +67,7 @@ class BlockContentTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     switch ($method) {
       case 'GET':
         $this->grantPermissionsToTestedRole([
@@ -82,7 +83,7 @@ class BlockContentTest extends ResourceTestBase {
         break;
 
       case 'POST':
-        $this->grantPermissionsToTestedRole(['create basic block content']);
+        $this->grantPermissionsToTestedRole(['access block library', 'create basic block content']);
         break;
 
       case 'DELETE':
@@ -94,7 +95,7 @@ class BlockContentTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpRevisionAuthorization($method): void {
+  protected function setUpRevisionAuthorization($method) {
     parent::setUpRevisionAuthorization($method);
     $this->grantPermissionsToTestedRole(['view any basic block content history']);
   }
@@ -130,7 +131,7 @@ class BlockContentTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $base_url = Url::fromUri('base:/jsonapi/block_content/basic/' . $this->entity->uuid())->setAbsolute();
     $self_url = clone $base_url;
     $version_identifier = 'id:' . $this->entity->getRevisionId();
@@ -201,7 +202,7 @@ class BlockContentTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     return [
       'data' => [
         'type' => 'block_content--basic',
@@ -219,7 +220,7 @@ class BlockContentTest extends ResourceTestBase {
     return match ($method) {
       'GET' => "The 'access block library' permission is required.",
       'PATCH' => "The 'edit any basic block content' permission is required.",
-      'POST' => "The following permissions are required: 'create basic block content' OR 'administer block content'.",
+      'POST' => "The following permissions are required: 'create basic block content' AND 'access block library'.",
       'DELETE' => "The 'delete any basic block content' permission is required.",
       default => parent::getExpectedUnauthorizedAccessMessage($method),
     };

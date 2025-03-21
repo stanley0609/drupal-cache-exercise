@@ -57,7 +57,7 @@ class DemoUmamiProfileTest extends BrowserTestBase {
   /**
    * Tests demo_umami profile warnings shown on Status Page.
    */
-  protected function testWarningsOnStatusPage(): void {
+  protected function testWarningsOnStatusPage() {
     $account = $this->drupalCreateUser(['administer site configuration']);
     $this->drupalLogin($account);
 
@@ -145,7 +145,7 @@ class DemoUmamiProfileTest extends BrowserTestBase {
   /**
    * Tests that the users can log in with the admin password entered at install.
    */
-  protected function testUser(): void {
+  protected function testUser() {
     $password = $this->rootUser->pass_raw;
     $ids = \Drupal::entityQuery('user')
       ->accessCheck(FALSE)
@@ -170,7 +170,7 @@ class DemoUmamiProfileTest extends BrowserTestBase {
     ];
     $account = $this->drupalCreateUser($permissions);
     $this->drupalLogin($account);
-    $assert_session = $this->assertSession();
+    $webassert = $this->assertSession();
 
     // Check that admin is able to edit the node.
     $nodes = $this->container->get('entity_type.manager')
@@ -178,33 +178,33 @@ class DemoUmamiProfileTest extends BrowserTestBase {
       ->loadByProperties(['title' => 'Deep mediterranean quiche']);
     $node = reset($nodes);
     $this->drupalGet($node->toUrl('edit-form'));
-    $assert_session->statusCodeEquals(200);
+    $webassert->statusCodeEquals(200);
 
     $this->submitForm([], 'Preview');
-    $assert_session->statusCodeEquals(200);
+    $webassert->statusCodeEquals(200);
     $this->assertSession()->elementsCount('css', 'h1', 1);
     $this->clickLink('Back to content editing');
 
     $this->submitForm([], "Save");
-    $assert_session->pageTextContains('Recipe Deep mediterranean quiche has been updated.');
+    $webassert->pageTextContains('Recipe Deep mediterranean quiche has been updated.');
   }
 
   /**
    * Tests that the Umami theme is available on the Appearance page.
    */
-  protected function testAppearance(): void {
+  protected function testAppearance() {
     $account = $this->drupalCreateUser(['administer themes']);
     $this->drupalLogin($account);
-    $assert_session = $this->assertSession();
+    $webassert = $this->assertSession();
 
     $this->drupalGet('admin/appearance');
-    $assert_session->pageTextContains('Umami');
+    $webassert->pageTextContains('Umami');
   }
 
   /**
    * Tests that the toolbar warning only appears on the admin pages.
    */
-  protected function testDemonstrationWarningMessage(): void {
+  protected function testDemonstrationWarningMessage() {
     $permissions = [
       'access content overview',
       'access toolbar',
@@ -278,7 +278,7 @@ class DemoUmamiProfileTest extends BrowserTestBase {
    *
    * @see drupalCreateUser()
    */
-  protected function drupalLoginWithPassword(AccountInterface $account, $password): void {
+  protected function drupalLoginWithPassword(AccountInterface $account, $password) {
     if ($this->loggedInUser) {
       $this->drupalLogout();
     }

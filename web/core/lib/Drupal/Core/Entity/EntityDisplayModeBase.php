@@ -34,6 +34,9 @@ abstract class EntityDisplayModeBase extends ConfigEntityBase implements EntityD
   /**
    * The entity type this form or view mode is used for.
    *
+   * This is not to be confused with EntityDisplayModeBase::$entityType which is
+   * inherited from Entity::$entityType.
+   *
    * @var string
    */
   protected $targetEntityType;

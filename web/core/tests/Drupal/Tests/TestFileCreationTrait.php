@@ -43,10 +43,10 @@ trait TestFileCreationTrait {
    * is prefixed with one of the above types, it will get returned as well, even
    * on subsequent calls.
    *
-   * @param string $type
+   * @param $type
    *   File type, possible values: 'binary', 'html', 'image', 'javascript',
    *   'php', 'sql', 'text'.
-   * @param int|null $size
+   * @param $size
    *   (optional) File size in bytes to match. Defaults to NULL, which will not
    *   filter the returned list by size.
    *
@@ -113,7 +113,7 @@ trait TestFileCreationTrait {
    *
    * @return int
    */
-  protected function compareFiles($file1, $file2): int {
+  protected function compareFiles($file1, $file2) {
     $compare_size = filesize($file1->uri) - filesize($file2->uri);
     if ($compare_size) {
       // Sort by file size.
@@ -147,7 +147,7 @@ trait TestFileCreationTrait {
    * @return string
    *   The name of the file, including the path.
    */
-  protected static function generateFile($filename, $width, $lines, $type = 'binary-text') {
+  public static function generateFile($filename, $width, $lines, $type = 'binary-text') {
     $text = '';
     for ($i = 0; $i < $lines; $i++) {
       // Generate $width - 1 characters to leave space for the "\n" character.

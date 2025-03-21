@@ -35,7 +35,7 @@ class MigrateFilterFormatTest extends MigrateDrupal7TestBase implements MigrateD
   /**
    * {@inheritdoc}
    */
-  public static function migrateDumpAlter(KernelTestBase $test): void {
+  public static function migrateDumpAlter(KernelTestBase $test) {
     $db = Database::getConnection('default', 'migrate');
     $fields = [
       'format' => 'image_resize_filter',

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\rest_test\Plugin\rest\resource;
 
 use Drupal\Core\StringTranslation\TranslatableMarkup;

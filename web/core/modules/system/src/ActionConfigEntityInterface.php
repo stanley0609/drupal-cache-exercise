@@ -19,10 +19,7 @@ interface ActionConfigEntityInterface extends ConfigEntityInterface {
   /**
    * Returns the operation type.
    *
-   * The operation type can be NULL if no type is specified.
-   *
-   * @return string|null
-   *   The operation type, or NULL if no type is specified.
+   * @return string
    */
   public function getType();
 

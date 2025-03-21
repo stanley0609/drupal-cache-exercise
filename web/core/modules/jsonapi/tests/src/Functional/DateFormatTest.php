@@ -11,6 +11,7 @@ use Drupal\Core\Url;
  * JSON:API integration test for the "DateFormat" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class DateFormatTest extends ConfigEntityResourceTestBase {
 
@@ -49,7 +50,7 @@ class DateFormatTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     $this->grantPermissionsToTestedRole(['administer site configuration']);
   }
 
@@ -72,7 +73,7 @@ class DateFormatTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/date_format/date_format/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     return [
       'jsonapi' => [
@@ -108,7 +109,7 @@ class DateFormatTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
     return [];
   }

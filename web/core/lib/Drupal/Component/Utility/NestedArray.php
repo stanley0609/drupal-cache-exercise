@@ -286,7 +286,7 @@ class NestedArray {
    * $correct = NestedArray::mergeDeep($link_options_1, $link_options_2);
    * @endcode
    *
-   * @param array ...$arrays
+   * @param array ...
    *   Arrays to merge.
    *
    * @return array
@@ -294,8 +294,8 @@ class NestedArray {
    *
    * @see NestedArray::mergeDeepArray()
    */
-  public static function mergeDeep(...$arrays) {
-    return self::mergeDeepArray($arrays);
+  public static function mergeDeep() {
+    return self::mergeDeepArray(func_get_args());
   }
 
   /**

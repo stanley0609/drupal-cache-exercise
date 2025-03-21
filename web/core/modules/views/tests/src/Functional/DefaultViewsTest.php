@@ -50,7 +50,7 @@ class DefaultViewsTest extends ViewTestBase {
    * @var array
    */
   protected $viewArgMap = [
-    'backlink' => [1],
+    'backlinks' => [1],
     'taxonomy_term' => [1],
     'glossary' => ['all'],
   ];

@@ -13,6 +13,7 @@ use Drupal\user\RoleInterface;
  * Tests the Media library entity reference widget.
  *
  * @group media_library
+ * @group #slow
  */
 class EntityReferenceWidgetTest extends MediaLibraryTestBase {
 
@@ -578,7 +579,7 @@ class EntityReferenceWidgetTest extends MediaLibraryTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function sortableUpdate($item, $from, $to = NULL): void {
+  protected function sortableUpdate($item, $from, $to = NULL) {
     // See core/modules/media_library/js/media_library.widget.js.
     $script = <<<JS
 (function ($) {

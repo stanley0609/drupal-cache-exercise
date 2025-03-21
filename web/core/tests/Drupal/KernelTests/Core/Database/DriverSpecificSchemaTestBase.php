@@ -72,7 +72,7 @@ abstract class DriverSpecificSchemaTestBase extends DriverSpecificKernelTestBase
         ->execute();
       return TRUE;
     }
-    catch (\Exception) {
+    catch (\Exception $e) {
       return FALSE;
     }
   }
@@ -96,7 +96,7 @@ abstract class DriverSpecificSchemaTestBase extends DriverSpecificKernelTestBase
         ->execute();
       return TRUE;
     }
-    catch (\Exception) {
+    catch (\Exception $e) {
       return FALSE;
     }
   }
@@ -115,7 +115,7 @@ abstract class DriverSpecificSchemaTestBase extends DriverSpecificKernelTestBase
         ->execute();
       $this->fail('Expected IntegrityConstraintViolationException not thrown');
     }
-    catch (IntegrityConstraintViolationException) {
+    catch (IntegrityConstraintViolationException $e) {
       // Do nothing, it's the expected behavior.
     }
   }
@@ -730,7 +730,7 @@ abstract class DriverSpecificSchemaTestBase extends DriverSpecificKernelTestBase
         ->execute();
       $this->fail('Expected IntegrityConstraintViolationException not thrown');
     }
-    catch (IntegrityConstraintViolationException) {
+    catch (IntegrityConstraintViolationException $e) {
     }
 
     // Ensure auto numbering now works.

@@ -11,6 +11,7 @@ use Drupal\Tests\layout_builder\Traits\EnableLayoutBuilderTrait;
  * Tests the Layout Builder UI with view modes.
  *
  * @group layout_builder
+ * @group #slow
  */
 class LayoutBuilderViewModeTest extends LayoutBuilderTestBase {
 

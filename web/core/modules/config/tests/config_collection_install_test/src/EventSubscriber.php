@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\config_collection_install_test;
 
 use Drupal\Core\Config\ConfigCollectionEvents;

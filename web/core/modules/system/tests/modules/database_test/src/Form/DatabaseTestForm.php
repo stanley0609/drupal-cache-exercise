@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\database_test\Form;
 
 use Drupal\Core\Database\Database;

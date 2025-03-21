@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Content administration and module settings user interface.
  */
 
 use Drupal\Core\Batch\BatchBuilder;

@@ -30,8 +30,6 @@ abstract class CachePluginBase extends PluginBase {
 
   /**
    * Contains all data that should be written/read from cache.
-   *
-   * @var array
    */
   public $storage = [];
 
@@ -82,17 +80,14 @@ abstract class CachePluginBase extends PluginBase {
   }
 
   /**
-   * Determines cache expiration time based on its type.
+   * Determine cache expiration time.
    *
-   * Plugins must override this to implement expiration in the cache table.
+   * Plugins must override this to implement expiration in the cache table. The
+   * default is CACHE_PERMANENT, indicating that the item will not be removed
+   * automatically from cache.
    *
    * @param string $type
    *   The cache type.
-   *
-   * @return int
-   *   Either an offset from the request time to indicate when the cache
-   *   expires, or \Drupal\Core\Cache\Cache::PERMANENT to indicate that the
-   *   cache does not expire. Defaults to \Drupal\Core\Cache\Cache::PERMANENT.
    */
   protected function cacheSetMaxAge($type) {
     return Cache::PERMANENT;

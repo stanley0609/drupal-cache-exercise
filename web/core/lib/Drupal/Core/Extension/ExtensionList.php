@@ -172,7 +172,7 @@ abstract class ExtensionList {
     try {
       $this->state->delete($this->getPathNamesCacheId());
     }
-    catch (DatabaseExceptionWrapper) {
+    catch (DatabaseExceptionWrapper $e) {
       // Ignore exceptions caused by a non existing {key_value} table in the
       // early installer.
     }

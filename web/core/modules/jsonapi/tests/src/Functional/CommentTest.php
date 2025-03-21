@@ -22,6 +22,7 @@ use GuzzleHttp\RequestOptions;
  * JSON:API integration test for the "Comment" content entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class CommentTest extends ResourceTestBase {
 
@@ -81,7 +82,7 @@ class CommentTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     switch ($method) {
       case 'GET':
         $this->grantPermissionsToTestedRole(['access comments', 'view test entity']);
@@ -143,7 +144,7 @@ class CommentTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/comment/comment/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     $author = User::load($this->entity->getOwnerId());
     return [
@@ -238,7 +239,7 @@ class CommentTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     return [
       'data' => [
         'type' => 'comment--comment',
@@ -293,10 +294,10 @@ class CommentTest extends ResourceTestBase {
    */
   protected function getExpectedUnauthorizedAccessMessage($method) {
     switch ($method) {
-      case 'GET':
+      case 'GET';
         return "The 'access comments' permission is required and the comment must be published.";
 
-      case 'POST':
+      case 'POST';
         return "The 'post comments' permission is required.";
 
       case 'PATCH':
@@ -329,7 +330,7 @@ class CommentTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static function getIncludePermissions(): array {
+  protected static function getIncludePermissions() {
     return [
       'type' => ['administer comment types'],
       'uid' => ['access user profiles'],

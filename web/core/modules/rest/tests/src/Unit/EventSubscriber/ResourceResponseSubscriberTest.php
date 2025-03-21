@@ -70,13 +70,12 @@ class ResourceResponseSubscriberTest extends UnitTestCase {
   }
 
   /**
-   * Tests the response format.
+   * @covers ::getResponseFormat
    *
    * Note this does *not* need to test formats being requested that are not
    * accepted by the server, because the routing system would have already
    * prevented those from reaching the controller.
    *
-   * @covers ::getResponseFormat
    * @dataProvider providerTestResponseFormat
    */
   public function testResponseFormat($methods, array $supported_response_formats, array $supported_request_formats, $request_format, array $request_headers, $request_body, $expected_response_format, $expected_response_content_type, $expected_response_content): void {
@@ -339,7 +338,7 @@ class ResourceResponseSubscriberTest extends UnitTestCase {
       ],
     ];
 
-    $unsafe_method_no_body_test_cases = [
+    $unsafe_method_bodyless_test_cases = [
       'unsafe methods without request bodies (DELETE): client requested no format, response should have the first acceptable format' => [
         ['DELETE'],
         ['xml', 'json'],
@@ -375,7 +374,7 @@ class ResourceResponseSubscriberTest extends UnitTestCase {
       ],
     ];
 
-    return $safe_method_test_cases + $unsafe_method_bodied_test_cases + $unsafe_method_no_body_test_cases;
+    return $safe_method_test_cases + $unsafe_method_bodied_test_cases + $unsafe_method_bodyless_test_cases;
   }
 
   /**
@@ -411,7 +410,7 @@ class ResourceResponseSubscriberTest extends UnitTestCase {
    * @return array
    *   An array of route requirements.
    */
-  protected function generateRouteRequirements(array $supported_response_formats, array $supported_request_formats): array {
+  protected function generateRouteRequirements(array $supported_response_formats, array $supported_request_formats) {
     $route_requirements = [
       '_format' => implode('|', $supported_response_formats),
     ];

@@ -521,7 +521,7 @@ class ContactSitewideTest extends BrowserTestBase {
    * @param array $third_party_settings
    *   Array of third party settings to be added to the posted form data.
    */
-  public function addContactForm($id, $label, $recipients, $reply, $selected, $message = 'Your message has been sent.', $third_party_settings = []): void {
+  public function addContactForm($id, $label, $recipients, $reply, $selected, $message = 'Your message has been sent.', $third_party_settings = []) {
     $edit = [];
     $edit['label'] = $label;
     $edit['id'] = $id;
@@ -558,7 +558,7 @@ class ContactSitewideTest extends BrowserTestBase {
    * @param string $redirect
    *   The path where user will be redirect after this form has been submitted..
    */
-  public function updateContactForm($id, $label, $recipients, $reply, $selected, $message = 'Your message has been sent.', $redirect = '/'): void {
+  public function updateContactForm($id, $label, $recipients, $reply, $selected, $message = 'Your message has been sent.', $redirect = '/') {
     $edit = [];
     $edit['label'] = $label;
     $edit['recipients'] = $recipients;
@@ -584,7 +584,7 @@ class ContactSitewideTest extends BrowserTestBase {
    * @param string $message
    *   The message body.
    */
-  public function submitContact($name, $mail, $subject, $id, $message): void {
+  public function submitContact($name, $mail, $subject, $id, $message) {
     $edit = [];
     $edit['name'] = $name;
     $edit['mail'] = $mail;
@@ -603,7 +603,7 @@ class ContactSitewideTest extends BrowserTestBase {
   /**
    * Deletes all forms.
    */
-  public function deleteContactForms(): void {
+  public function deleteContactForms() {
     $contact_forms = ContactForm::loadMultiple();
     foreach ($contact_forms as $id => $contact_form) {
       if ($id == 'personal') {

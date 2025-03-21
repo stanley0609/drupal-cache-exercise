@@ -36,7 +36,7 @@ class SettingsTrayTest extends BrowserTestBase {
    * @return string
    *   The CSS selector.
    */
-  protected function getBlockSelector(Block $block): string {
+  protected function getBlockSelector(Block $block) {
     return '#block-' . $block->id();
   }
 

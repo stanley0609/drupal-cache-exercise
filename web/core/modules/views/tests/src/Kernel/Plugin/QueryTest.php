@@ -41,7 +41,7 @@ class QueryTest extends ViewsKernelTestBase {
   /**
    * Tests the ViewExecutable::initQuery method.
    */
-  public function _testInitQuery(): void {
+  public function _testInitQuery() {
     $view = Views::getView('test_view');
     $view->setDisplay();
 
@@ -49,7 +49,7 @@ class QueryTest extends ViewsKernelTestBase {
     $this->assertInstanceOf(QueryTestPlugin::class, $view->query);
   }
 
-  public function _testQueryExecute(): void {
+  public function _testQueryExecute() {
     $view = Views::getView('test_view');
     $view->setDisplay();
 
@@ -65,7 +65,7 @@ class QueryTest extends ViewsKernelTestBase {
    *
    * @see \Drupal\views\Plugin\views\query\QueryPluginBase
    */
-  protected function queryMethodsTests(): void {
+  protected function queryMethodsTests() {
     $view = Views::getView('test_view');
     $view->setDisplay();
 

@@ -460,7 +460,7 @@ class ContentEntityTest extends KernelTestBase {
    * @return array
    *   The definition.
    */
-  protected function migrationDefinition($plugin_id, array $configuration = []): array {
+  protected function migrationDefinition($plugin_id, array $configuration = []) {
     return [
       'source' => [
         'plugin' => $plugin_id,

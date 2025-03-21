@@ -5,8 +5,6 @@
  * Experimental Test Requirements module to test hook_requirements().
  */
 
-declare(strict_types=1);
-
 /**
  * Implements hook_requirements().
  */

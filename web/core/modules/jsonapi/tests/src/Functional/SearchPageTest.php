@@ -13,6 +13,7 @@ use Drupal\search\Entity\SearchPage;
  * JSON:API integration test for the "SearchPage" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class SearchPageTest extends ConfigEntityResourceTestBase {
 
@@ -46,7 +47,7 @@ class SearchPageTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     switch ($method) {
       case 'GET':
         $this->grantPermissionsToTestedRole(['access content']);
@@ -77,7 +78,7 @@ class SearchPageTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/search_page/search_page/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     return [
       'jsonapi' => [
@@ -121,7 +122,7 @@ class SearchPageTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
     return [];
   }

@@ -48,7 +48,6 @@ Core JavaScript packages
 
 Committer team facilitators
 - Pamela Barone 'pameeela' https://www.drupal.org/u/pameeela
-- Griffyn Heels 'griffynh' https://www.drupal.org/u/griffynh (provisional)
 
 Core initiative facilitators
 - Gábor Hojtsy 'Gábor Hojtsy' https://www.drupal.org/u/gábor-hojtsy
@@ -60,6 +59,9 @@ The Drupal core subsystem maintainers oversee the development of Drupal
 subsystems. See https://www.drupal.org/contribute/core-maintainers for more
 information on their responsibilities, and to find out how to become a subsystem
 maintainer. Current subsystem maintainers:
+
+Actions UI
+- ?
 
 Ajax
 - Alex Bronstein 'effulgentsia' https://www.drupal.org/u/effulgentsia
@@ -98,6 +100,9 @@ Block Content
 - Adam Bramley 'acbramley' https://www.drupal.org/u/acbramley
 - Lee Rowlands 'larowlan' https://www.drupal.org/u/larowlan
 - Stephen Mustgrave 'smustgrave' https://www.drupal.org/u/smustgrave
+
+Book
+- Peter Wolanin 'pwolanin' https://www.drupal.org/u/pwolanin
 
 Bootstrap
 - ?
@@ -220,6 +225,9 @@ File
 Filter
 - ?
 
+Forum
+- Lee Rowlands 'larowlan' https://www.drupal.org/u/larowlan
+
 Form API
 - Alex Bronstein 'effulgentsia' https://www.drupal.org/u/effulgentsia
 - Tim Plunkett 'tim.plunkett' https://www.drupal.org/u/tim.plunkett
@@ -232,7 +240,7 @@ Help
 - Andrey Postnikov 'andypost' https://www.drupal.org/u/andypost
 
 Image
-- ?
+- Claudiu Cristea 'claudiu.cristea' https://www.drupal.org/u/claudiu.cristea
 
 Inline Form Errors
 - Daniël Smidt 'dmsmidt' https://www.drupal.org/u/dmsmidt
@@ -277,6 +285,7 @@ Markup
 Media
 - Sean Blommaert 'seanB' https://www.drupal.org/u/seanb
 - Marcos Cano 'marcoscano' https://www.drupal.org/u/marcoscano
+- Christian Fritsch 'chr.fritsch' https://www.drupal.org/u/chr.fritsch
 - Adam Globus-Hoenich 'phenaproxima' https://www.drupal.org/u/phenaproxima
 
   Media Library
@@ -284,9 +293,11 @@ Media
   - Adam Globus-Hoenich 'phenaproxima' https://www.drupal.org/u/phenaproxima
 
 Menu
+- Daniel Wehner 'dawehner' https://www.drupal.org/u/dawehner
 - Peter Wolanin 'pwolanin' https://www.drupal.org/u/pwolanin
 
 Menu Link Content
+- Daniel Wehner 'dawehner' https://www.drupal.org/u/dawehner
 - Peter Wolanin 'pwolanin' https://www.drupal.org/u/pwolanin
 
 Menu UI
@@ -368,7 +379,6 @@ Search
 - Peter Wolanin 'pwolanin' https://www.drupal.org/u/pwolanin
 
 Serialization
-- Brad Jones 'bradjones1' https://www.drupal.org/u/bradjones1
 - Damian Lee 'damiankloip' https://www.drupal.org/u/damiankloip
 
 Settings Tray
@@ -377,11 +387,11 @@ Settings Tray
 Shortcut
 - Jibran Ijaz 'jibran' https://www.drupal.org/u/jibran
 
-Stable9
-- Mark Conroy 'markconroy' https://www.drupal.org/u/markconroy
-
 Stark
 - John Albin Wilkins 'JohnAlbin' https://www.drupal.org/u/johnalbin
+
+Statistics
+- ?
 
 Syslog
 - Mariano D'Agostino 'dagmar' https://www.drupal.org/u/dagmar
@@ -415,6 +425,12 @@ Token
 Toolbar
 - Théodore Biadala 'nod_' https://www.drupal.org/u/nod_
 
+Tour
+- Nick Schuch 'nick_schuch' https://www.drupal.org/u/nick_schuch
+
+Tracker
+- ?
+
 Transliteration
 - Andrei Mateescu 'amateescu' https://www.drupal.org/u/amateescu
 
@@ -437,6 +453,7 @@ User
 - Kristiaan Van den Eynde 'kristiaanvandeneynde' https://www.drupal.org/u/kristiaanvandeneynde
 
 Views
+- Daniel Wehner 'dawehner' https://www.drupal.org/u/dawehner
 - Tim Plunkett 'tim.plunkett' https://www.drupal.org/u/tim.plunkett
 - Damian Lee 'damiankloip' https://www.drupal.org/u/damiankloip
 - Jess Myrbo 'xjm' https://www.drupal.org/u/xjm
@@ -471,6 +488,7 @@ Performance
 Testing
 - Alex Pott 'alexpott' https://www.drupal.org/u/alexpott
 - Sascha Grossenbacher 'Berdir' https://www.drupal.org/u/berdir
+- Daniel Wehner 'dawehner' https://www.drupal.org/u/dawehner
 - Alberto M. 'mondrake' https://www.drupal.org/u/mondrake
 
 Usability

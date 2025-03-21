@@ -11,6 +11,7 @@ use Drupal\workflows\Entity\Workflow;
  * Tests validation of workflow entities.
  *
  * @group workflows
+ * @group #slow
  */
 class WorkflowValidationTest extends ConfigEntityValidationTestBase {
 

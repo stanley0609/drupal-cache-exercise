@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\migrate\Unit;
 
+use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\sqlite\Driver\Database\sqlite\Connection;
+use Drupal\migrate\Plugin\MigrationPluginManager;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
@@ -70,7 +72,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    * @param array $map
    *   The row to save.
    */
-  protected function saveMap(array $map): void {
+  protected function saveMap(array $map) {
     $table = 'migrate_map_sql_idmap_test';
 
     $schema = $this->database->schema();
@@ -134,7 +136,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    *   - rollback_action
    *   - hash
    */
-  protected function idMapDefaults(): array {
+  protected function idMapDefaults() {
     $defaults = [
       'source_row_status' => MigrateIdMapInterface::STATUS_IMPORTED,
       'rollback_action' => MigrateIdMapInterface::ROLLBACK_DELETE,
@@ -924,7 +926,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
       $id_map->setUpdate([]);
       $this->assertFalse(FALSE, 'MigrateException not thrown, when source identifiers were provided to update.');
     }
-    catch (MigrateException) {
+    catch (MigrateException $e) {
       $this->assertTrue(TRUE, "MigrateException thrown, when source identifiers were not provided to update.");
     }
   }
@@ -1045,7 +1047,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    * @return array
    *   The contents of an ID map.
    */
-  private function getIdMapContents(): array {
+  private function getIdMapContents() {
     $result = $this->database
       ->select('migrate_map_sql_idmap_test', 't')
       ->fields('t')
@@ -1215,6 +1217,22 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
         ],
       ],
     ];
+  }
+
+  /**
+   * Tests deprecation message from Sql::getMigrationPluginManager().
+   *
+   * @group legacy
+   */
+  public function testGetMigrationPluginManagerDeprecation(): void {
+    $container = new ContainerBuilder();
+    $migration_plugin_manager = $this->createMock(MigrationPluginManager::class);
+    $container->set('plugin.manager.migration', $migration_plugin_manager);
+    \Drupal::setContainer($container);
+
+    $this->expectDeprecation('Drupal\migrate\Plugin\migrate\id_map\Sql::getMigrationPluginManager() is deprecated in drupal:9.5.0 and is removed from drupal:11.0.0. Use $this->migrationPluginManager instead. See https://www.drupal.org/node/3277306');
+    $id_map = $this->getIdMap();
+    $id_map->getMigrationPluginManager();
   }
 
 }

@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Batch process to check the availability of remote or local po files.
  */
 
 use Drupal\Core\File\Exception\FileException;

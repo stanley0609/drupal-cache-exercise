@@ -106,7 +106,7 @@ class TermTranslationViewsTest extends TaxonomyTestBase {
   /**
    * Setup translated terms in a hierarchy.
    */
-  protected function setUpTerms(): void {
+  protected function setUpTerms() {
     $parent_vid = 0;
     foreach ($this->termTranslationMap as $name => $translation) {
 

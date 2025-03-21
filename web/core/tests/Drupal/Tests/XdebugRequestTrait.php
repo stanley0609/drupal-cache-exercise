@@ -25,7 +25,7 @@ trait XdebugRequestTrait {
    * @return array
    *   The extracted cookies.
    */
-  protected function extractCookiesFromRequest(Request $request): array {
+  protected function extractCookiesFromRequest(Request $request) {
     $cookie_params = $request->cookies;
     $cookies = [];
     if ($cookie_params->has('XDEBUG_SESSION')) {

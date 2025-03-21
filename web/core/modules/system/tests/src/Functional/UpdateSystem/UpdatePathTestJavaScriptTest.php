@@ -40,7 +40,7 @@ class UpdatePathTestJavaScriptTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function doSelectionTest(): void {
+  protected function doSelectionTest() {
     // Ensure that at least one JS script has drupalSettings in there.
     $scripts = $this->xpath('//script');
     $found = FALSE;

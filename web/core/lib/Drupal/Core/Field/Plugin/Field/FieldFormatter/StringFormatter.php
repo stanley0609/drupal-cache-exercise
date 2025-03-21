@@ -2,7 +2,6 @@
 
 namespace Drupal\Core\Field\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\Attribute\FieldFormatter;
@@ -123,33 +122,27 @@ class StringFormatter extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = [];
+    $url = NULL;
     $entity = $items->getEntity();
     $entity_type = $entity->getEntityType();
 
-    $render_as_link = FALSE;
     if ($this->getSetting('link_to_entity') && !$entity->isNew() && $entity_type->hasLinkTemplate('canonical')) {
       $url = $this->getEntityUrl($entity);
-      $access = $url->access(return_as_object: TRUE);
-      (new CacheableMetadata())
-        ->addCacheableDependency($access)
-        ->applyTo($elements);
-      $render_as_link = $access->isAllowed();
     }
 
     foreach ($items as $delta => $item) {
-      if ($render_as_link) {
-        assert(isset($url));
+      $view_value = $this->viewValue($item);
+      if ($url) {
         $elements[$delta] = [
           '#type' => 'link',
-          '#title' => $this->viewValue($item),
+          '#title' => $view_value,
           '#url' => $url,
         ];
       }
       else {
-        $elements[$delta] = $this->viewValue($item);
+        $elements[$delta] = $view_value;
       }
     }
-
     return $elements;
   }
 
@@ -184,7 +177,7 @@ class StringFormatter extends FormatterBase {
   protected function getEntityUrl(EntityInterface $entity) {
     // For the default revision, the 'revision' link template falls back to
     // 'canonical'.
-    // @see \Drupal\Core\Entity\EntityBase::toUrl()
+    // @see \Drupal\Core\Entity\Entity::toUrl()
     $rel = $entity->getEntityType()->hasLinkTemplate('revision') ? 'revision' : 'canonical';
     return $entity->toUrl($rel);
   }

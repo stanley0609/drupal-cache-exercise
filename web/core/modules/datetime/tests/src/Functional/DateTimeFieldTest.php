@@ -36,7 +36,7 @@ class DateTimeFieldTest extends DateTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getTestFieldType(): string {
+  protected function getTestFieldType() {
     return 'datetime';
   }
 

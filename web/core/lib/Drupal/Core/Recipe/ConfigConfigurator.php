@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\Core\Recipe;
 
 use Drupal\Core\Config\FileStorage;
-use Drupal\Core\Config\NullStorage;
 use Drupal\Core\Config\StorageInterface;
 
 /**
@@ -15,8 +14,6 @@ use Drupal\Core\Config\StorageInterface;
 final class ConfigConfigurator {
 
   public readonly ?string $recipeConfigDirectory;
-
-  private readonly bool|array $strict;
 
   /**
    * @param array $config
@@ -28,20 +25,8 @@ final class ConfigConfigurator {
    */
   public function __construct(public readonly array $config, string $recipe_directory, StorageInterface $active_configuration) {
     $this->recipeConfigDirectory = is_dir($recipe_directory . '/config') ? $recipe_directory . '/config' : NULL;
-    // @todo Consider defaulting this to FALSE in https://drupal.org/i/3478669.
-    $this->strict = $config['strict'] ?? TRUE;
-
     $recipe_storage = $this->getConfigStorage();
-    if ($this->strict === TRUE) {
-      $strict_list = $recipe_storage->listAll();
-    }
-    else {
-      $strict_list = $this->strict ?: [];
-    }
-
-    // Everything in the strict list needs to be identical in the recipe and
-    // active storage.
-    foreach ($strict_list as $config_name) {
+    foreach ($recipe_storage->listAll() as $config_name) {
       if ($active_data = $active_configuration->read($config_name)) {
         // @todo https://www.drupal.org/i/3439714 Investigate if there is any
         //   generic code in core for this.
@@ -105,10 +90,10 @@ final class ConfigConfigurator {
       $module_list = \Drupal::service('extension.list.module');
       /** @var \Drupal\Core\Extension\ThemeExtensionList $theme_list */
       $theme_list = \Drupal::service('extension.list.theme');
-      foreach ($this->config['import'] as $extension => $names) {
+      foreach ($this->config['import'] as $extension => $config) {
         // If the recipe explicitly does not want to import any config from this
         // extension, skip it.
-        if ($names === NULL) {
+        if ($config === NULL) {
           continue;
         }
         $path = match (TRUE) {
@@ -116,36 +101,12 @@ final class ConfigConfigurator {
           $theme_list->exists($extension) => $theme_list->getPath($extension),
           default => throw new \RuntimeException("$extension is not a theme or module")
         };
-
-        $storage = new RecipeConfigStorageWrapper(
-          new FileStorage($path . '/config/install'),
-          new FileStorage($path . '/config/optional'),
-        );
-        // If we get here, $names is either '*', or a list of config names
-        // provided by the current extension. In the latter case, we only want
-        // to import the config that is in the list, so use an
-        // AllowListConfigStorage to filter out the extension's other config.
-        if ($names && is_array($names)) {
-          $storage = new AllowListConfigStorage($storage, $names);
-        }
-        $storages[] = $storage;
+        $config = $config === '*' ? [] : $config;
+        $storages[] = new RecipeExtensionConfigStorage($path, $config);
       }
     }
-    $storage = RecipeConfigStorageWrapper::createStorageFromArray($storages);
 
-    if ($this->strict) {
-      return $storage;
-    }
-    // If we're not in strict mode, we only want to import config that doesn't
-    // exist yet in active storage.
-
-    $names = array_diff(
-      $storage->listAll(),
-      \Drupal::service('config.storage')->listAll(),
-    );
-    return $names
-      ? new AllowListConfigStorage($storage, $names)
-      : new NullStorage();
+    return RecipeConfigStorageWrapper::createStorageFromArray($storages);
   }
 
   /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\Tests\Core\Extension;
 
 use Drupal\Component\FileCache\FileCacheFactory;
+use Drupal\Core\Extension\Discovery\RecursiveExtensionFilterIterator;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Extension\ExtensionDiscovery;
 use Drupal\Tests\UnitTestCase;
@@ -121,7 +122,7 @@ class ExtensionDiscoveryTest extends UnitTestCase {
    *   Format: $[$type][$name] = $yml_file
    *   E.g. $['module']['system'] = 'system.info.yml'
    */
-  protected function populateFilesystemStructure(array &$filesystem_structure): array {
+  protected function populateFilesystemStructure(array &$filesystem_structure) {
     $info_by_file = [
       'core/profiles/standard/standard.info.yml' => [
         'type' => 'profile',
@@ -194,7 +195,7 @@ class ExtensionDiscoveryTest extends UnitTestCase {
    * @param string $content
    *   The contents of the file.
    */
-  protected function addFileToFilesystemStructure(array &$filesystem_structure, array $pieces, $content): void {
+  protected function addFileToFilesystemStructure(array &$filesystem_structure, array $pieces, $content) {
     $piece = array_shift($pieces);
     if ($pieces !== []) {
       $filesystem_structure += [$piece => []];
@@ -203,6 +204,18 @@ class ExtensionDiscoveryTest extends UnitTestCase {
     else {
       $filesystem_structure[$piece] = $content;
     }
+  }
+
+  /**
+   * Tests deprecated iterator.
+   *
+   * @covers \Drupal\Core\Extension\Discovery\RecursiveExtensionFilterIterator
+   * @group legacy
+   */
+  public function testDeprecatedIterator(): void {
+    $this->expectDeprecation('The Drupal\Core\Extension\Discovery\RecursiveExtensionFilterIterator is deprecated in drupal:10.2.0 and is removed from drupal:11.0.0. Use \Drupal\Core\Extension\Discovery\RecursiveExtensionFilterCallback instead. See https://www.drupal.org/node/3343023');
+    $recursive_extension_filter_iterator = new RecursiveExtensionFilterIterator(new \RecursiveDirectoryIterator('.'));
+    $this->assertInstanceOf(RecursiveExtensionFilterIterator::class, $recursive_extension_filter_iterator);
   }
 
 }

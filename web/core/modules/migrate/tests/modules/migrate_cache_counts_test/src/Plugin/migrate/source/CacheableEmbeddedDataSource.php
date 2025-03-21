@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\migrate_cache_counts_test\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\EmbeddedDataSource;
@@ -20,7 +18,8 @@ class CacheableEmbeddedDataSource extends EmbeddedDataSource {
   /**
    * {@inheritdoc}
    */
-  public function count($refresh = FALSE): int {
+  #[\ReturnTypeWillChange]
+  public function count($refresh = FALSE) {
     return SourcePluginBase::count($refresh);
   }
 

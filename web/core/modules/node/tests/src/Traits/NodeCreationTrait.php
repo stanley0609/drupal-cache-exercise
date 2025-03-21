@@ -49,7 +49,7 @@ trait NodeCreationTrait {
    *
    *   @code
    *     $this->drupalCreateNode([
-   *       'title' => 'Hello, world!',
+   *       'title' => t('Hello, world!'),
    *       'type' => 'article',
    *     ]);
    *   @endcode

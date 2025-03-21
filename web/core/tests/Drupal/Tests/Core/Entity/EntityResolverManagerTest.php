@@ -439,7 +439,7 @@ class EntityResolverManagerTest extends UnitTestCase {
   /**
    * Creates the entity type manager mock returning entity type objects.
    */
-  protected function setupEntityTypes(): void {
+  protected function setupEntityTypes() {
     $definition = $this->createMock('Drupal\Core\Entity\EntityTypeInterface');
     $definition->expects($this->any())
       ->method('getClass')

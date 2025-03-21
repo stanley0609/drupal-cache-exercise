@@ -81,17 +81,7 @@ final class NavigationShortcutsBlock extends BlockBase implements ContainerFacto
           'contexts' => ['user'],
         ],
         '#lazy_builder_preview' => [
-          [
-            '#theme' => 'navigation_menu',
-            '#menu_name' => 'shortcuts',
-            '#title' => $this->configuration['label'],
-            '#items' => [
-              [
-                'title' => $this->configuration['label'],
-                'class' => 'shortcuts',
-              ],
-            ],
-          ],
+          '#markup' => '<a href="#" class="toolbar-tray-lazy-placeholder-link">&nbsp;</a>',
         ],
       ],
     ];

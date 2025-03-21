@@ -28,9 +28,8 @@ class Schema extends DatabaseSchema {
    * This is collected by Schema::queryTableInformation(), by introspecting the
    * database.
    *
-   * @var array
-   *
    * @see \Drupal\pgsql\Driver\Database\pgsql\Schema::queryTableInformation()
+   * @var array
    */
   protected $tableInformation = [];
 
@@ -577,14 +576,14 @@ EOD;
       // cSpell:disable-next-line
       // Example (drupal_Gk7Su_T1jcBHVuvSPeP22_I3Ni4GrVEgTYlIYnBJkro_idx).
       if (str_contains($index->indexname, 'drupal_')) {
-        preg_match('/^drupal_(.*)_' . preg_quote($index_type, NULL) . '/', $index->indexname, $matches);
+        preg_match('/^drupal_(.*)_' . preg_quote($index_type) . '/', $index->indexname, $matches);
         $index_name = $matches[1];
       }
       else {
         // Make sure to remove the suffix from index names, because
         // $this->ensureIdentifiersLength() will add the suffix again and thus
         // would result in a wrong index name.
-        preg_match('/^' . preg_quote($table_name, NULL) . '__(.*)__' . preg_quote($index_type, NULL) . '/', $index->indexname, $matches);
+        preg_match('/^' . preg_quote($table_name) . '__(.*)__' . preg_quote($index_type) . '/', $index->indexname, $matches);
         $index_name = $matches[1];
       }
       // The renaming of an index will fail when the there exists an table with

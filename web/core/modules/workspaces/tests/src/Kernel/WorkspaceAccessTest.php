@@ -13,6 +13,7 @@ use Drupal\workspaces\Entity\Workspace;
  * Tests access on workspaces.
  *
  * @group workspaces
+ * @group #slow
  */
 class WorkspaceAccessTest extends KernelTestBase {
 

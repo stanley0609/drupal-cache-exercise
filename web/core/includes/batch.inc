@@ -22,7 +22,6 @@ use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Renders the batch processing page based on the current state of the batch.
@@ -43,8 +42,8 @@ function _batch_page(Request $request) {
   if (!$batch) {
     $batch = \Drupal::service('batch.storage')->load($request_id);
     if (!$batch) {
-      \Drupal::messenger()->addError(t('No batch with ID @batch exists.', ['@batch' => $request_id]));
-      throw new NotFoundHttpException(sprintf('No batch with ID %s exists.', $request_id));
+      \Drupal::messenger()->addError(t('No active batch.'));
+      return new RedirectResponse(Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString());
     }
   }
 

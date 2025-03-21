@@ -18,7 +18,7 @@ trait OEmbedTestTrait {
    *
    * @return string
    */
-  protected function getFixturesDirectory(): string {
+  protected function getFixturesDirectory() {
     return \Drupal::service('extension.list.module')->getPath('media') . '/tests/fixtures/oembed';
   }
 
@@ -27,7 +27,7 @@ trait OEmbedTestTrait {
    *
    * @return string
    */
-  protected function getFixturesUrl(): string {
+  protected function getFixturesUrl() {
     return $this->baseUrl . '/' . $this->getFixturesDirectory();
   }
 

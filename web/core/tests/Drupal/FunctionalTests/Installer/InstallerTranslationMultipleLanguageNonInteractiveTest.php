@@ -30,7 +30,7 @@ class InstallerTranslationMultipleLanguageNonInteractiveTest extends BrowserTest
   /**
    * {@inheritdoc}
    */
-  protected function prepareEnvironment(): void {
+  protected function prepareEnvironment() {
     parent::prepareEnvironment();
     // Place custom local translations in the translations directory.
     mkdir(DRUPAL_ROOT . '/' . $this->siteDirectory . '/files/translations', 0777, TRUE);
@@ -47,7 +47,7 @@ class InstallerTranslationMultipleLanguageNonInteractiveTest extends BrowserTest
    * @return string
    *   Contents for the test .po file.
    */
-  protected function getPo($langcode): string {
+  protected function getPo($langcode) {
     return <<<PO
 msgid ""
 msgstr ""
@@ -130,7 +130,7 @@ PO;
   /**
    * Helper function to verify that the expected strings are translated.
    */
-  protected function verifyImportedStringsTranslated(): void {
+  protected function verifyImportedStringsTranslated() {
     $test_samples = ['Save and continue', 'Anonymous', 'Language'];
     $langcodes = ['de', 'es'];
 

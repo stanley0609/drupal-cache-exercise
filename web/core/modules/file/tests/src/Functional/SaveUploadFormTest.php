@@ -12,6 +12,7 @@ use Drupal\Tests\TestFileCreationTrait;
  * Tests the _file_save_upload_from_form() function.
  *
  * @group file
+ * @group #slow
  *
  * @see _file_save_upload_from_form()
  */
@@ -369,7 +370,7 @@ class SaveUploadFormTest extends FileManagedTestBase {
     // Check that the correct hooks were called.
     $this->assertFileHooksCalled(['validate', 'insert']);
 
-    // Ensure that setting $validators['FileExtension'] = ['extensions' => NULL]
+    // Ensure that setting $validators['file_validate_extensions'] = ['']
     // rejects all files.
     // Reset the hook counters.
     file_test_reset();

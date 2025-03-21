@@ -1,6 +1,8 @@
 <?php
 
-declare(strict_types=1);
+/**
+ * @file
+ */
 
 // cspell:ignore divpiggydiv timecurrent timetime
 

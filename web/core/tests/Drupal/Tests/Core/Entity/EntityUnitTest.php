@@ -7,6 +7,7 @@ namespace Drupal\Tests\Core\Entity;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
+use Drupal\Core\Entity\EntityBase;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeRepositoryInterface;
@@ -126,7 +127,7 @@ class EntityUnitTest extends UnitTestCase {
     $container->set('cache_tags.invalidator', $this->cacheTagsInvalidator->reveal());
     \Drupal::setContainer($container);
 
-    $this->entity = new StubEntityBase($this->values, $this->entityTypeId);
+    $this->entity = new EntityBaseTest($this->values, $this->entityTypeId);
   }
 
   /**
@@ -230,9 +231,9 @@ class EntityUnitTest extends UnitTestCase {
   /**
    * Setup for the tests of the ::load() method.
    */
-  public function setupTestLoad(): void {
+  public function setupTestLoad() {
     // Base our mocked entity on a real entity class so we can test if calling
-    // EntityBase::load() on the base class will bubble up to an actual entity.
+    // Entity::load() on the base class will bubble up to an actual entity.
     $this->entityTypeId = 'entity_test_mul';
     $methods = get_class_methods(EntityTestMul::class);
     unset($methods[array_search('load', $methods)]);
@@ -246,11 +247,9 @@ class EntityUnitTest extends UnitTestCase {
   }
 
   /**
-   * Tests EntityBase::load().
-   *
-   * When called statically on a subclass of Entity.
-   *
    * @covers ::load
+   *
+   * Tests Entity::load() when called statically on a subclass of Entity.
    */
   public function testLoad(): void {
     $this->setupTestLoad();
@@ -276,17 +275,15 @@ class EntityUnitTest extends UnitTestCase {
 
     \Drupal::getContainer()->set('entity_type.repository', $entity_type_repository);
 
-    // Call EntityBase::load statically and check that it returns the mock
-    // entity.
+    // Call Entity::load statically and check that it returns the mock entity.
     $this->assertSame($this->entity, $class_name::load(1));
   }
 
   /**
-   * Tests EntityBase::loadMultiple().
-   *
-   * When called statically on a subclass of Entity.
-   *
    * @covers ::loadMultiple
+   *
+   * Tests Entity::loadMultiple() when called statically on a subclass of
+   * Entity.
    */
   public function testLoadMultiple(): void {
     $this->setupTestLoad();
@@ -312,8 +309,8 @@ class EntityUnitTest extends UnitTestCase {
 
     \Drupal::getContainer()->set('entity_type.repository', $entity_type_repository);
 
-    // Call EntityBase::loadMultiple() statically and check that it returns the
-    // mock entity.
+    // Call Entity::loadMultiple statically and check that it returns the mock
+    // entity.
     $this->assertSame([1 => $this->entity], $class_name::loadMultiple([1]));
   }
 
@@ -344,7 +341,7 @@ class EntityUnitTest extends UnitTestCase {
 
     \Drupal::getContainer()->set('entity_type.repository', $entity_type_repository);
 
-    // Call EntityBase::create() statically and check that it returns the mock
+    // Call Entity::create() statically and check that it returns the mock
     // entity.
     $this->assertSame($this->entity, $class_name::create([]));
   }
@@ -602,5 +599,13 @@ class EntityUnitTest extends UnitTestCase {
     $this->entity->mergeCacheMaxAge(1800);
     $this->assertEquals(600, $this->entity->getCacheMaxAge());
   }
+
+}
+
+class EntityBaseTest extends EntityBase {
+  public $id;
+  public $langcode;
+  public $uuid;
+  public $label;
 
 }

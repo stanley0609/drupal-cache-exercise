@@ -1,6 +1,4 @@
 services:
-  _defaults:
-    autoconfigure: true
   navigation.renderer:
     class: Drupal\navigation\NavigationRenderer
     arguments:
@@ -14,8 +12,7 @@ services:
         '@file_url_generator',
         '@plugin.manager.layout_builder.section_storage',
         '@request_stack',
-        '@extension.list.module',
-        '@current_user',
+        '@extension.list.module'
       ]
   Drupal\navigation\NavigationRenderer: '@navigation.renderer'
 
@@ -32,10 +29,5 @@ services:
 
   navigation.user_lazy_builder:
     class: Drupal\navigation\UserLazyBuilder
-    arguments: ['@current_user']
+    arguments: ['@module_handler', '@current_user']
   Drupal\navigation\UserLazyBuilders: '@navigation.user_lazy_builder'
-
-  plugin.manager.top_bar_item:
-    class: Drupal\navigation\TopBarItemManager
-    parent: default_plugin_manager
-  Drupal\navigation\TopBarItemManagerInterface: '@plugin.manager.top_bar_item'

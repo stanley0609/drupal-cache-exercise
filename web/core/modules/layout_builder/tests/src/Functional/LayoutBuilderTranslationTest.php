@@ -139,7 +139,7 @@ class LayoutBuilderTranslationTest extends ContentTranslationTestBase {
   /**
    * Setup translated entity with layouts.
    */
-  protected function setUpEntities(): void {
+  protected function setUpEntities() {
     $this->drupalLogin($this->administrator);
 
     // @todo The Layout Builder UI relies on local tasks; fix in
@@ -160,7 +160,7 @@ class LayoutBuilderTranslationTest extends ContentTranslationTestBase {
   /**
    * Set up the View Display.
    */
-  protected function setUpViewDisplay(): void {
+  protected function setUpViewDisplay() {
     EntityViewDisplay::create([
       'targetEntityType' => $this->entityTypeId,
       'bundle' => $this->bundle,
@@ -176,7 +176,7 @@ class LayoutBuilderTranslationTest extends ContentTranslationTestBase {
   /**
    * Adds an entity translation.
    */
-  protected function addEntityTranslation(): void {
+  protected function addEntityTranslation() {
     $user = $this->loggedInUser;
     $this->drupalLogin($this->translator);
     $add_translation_url = Url::fromRoute("entity.$this->entityTypeId.content_translation_add", [
@@ -192,7 +192,7 @@ class LayoutBuilderTranslationTest extends ContentTranslationTestBase {
   /**
    * Adds a layout override.
    */
-  protected function addLayoutOverride(): void {
+  protected function addLayoutOverride() {
     $assert_session = $this->assertSession();
     $page = $this->getSession()->getPage();
     $entity_url = $this->entity->toUrl()->toString();

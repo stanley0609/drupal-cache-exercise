@@ -16,6 +16,7 @@ use Drupal\layout_builder_test\Plugin\SectionStorage\SimpleConfigSectionStorage;
  * @coversDefaultClass \Drupal\layout_builder_test\Plugin\SectionStorage\SimpleConfigSectionStorage
  *
  * @group layout_builder
+ * @group #slow
  */
 class SimpleConfigSectionListTest extends SectionListTestBase {
 

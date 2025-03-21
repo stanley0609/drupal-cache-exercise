@@ -195,7 +195,7 @@ class TermParentsTest extends BrowserTestBase {
    * @return \Drupal\taxonomy\TermInterface[]
    *   A list of terms created for testing.
    */
-  protected function doTestEditingSingleParent(): array {
+  protected function doTestEditingSingleParent() {
     $terms = [];
 
     // Create two terms without any parents.

@@ -37,6 +37,11 @@ class CollectRoutesTest extends UnitTestCase {
     parent::setUp();
 
     $container = new ContainerBuilder();
+
+    $request = $this->getMockBuilder('\Symfony\Component\HttpFoundation\Request')
+      ->disableOriginalConstructor()
+      ->getMock();
+
     $view = new View(['id' => 'test_view'], 'view');
 
     $view_executable = $this->getMockBuilder('\Drupal\views\ViewExecutable')

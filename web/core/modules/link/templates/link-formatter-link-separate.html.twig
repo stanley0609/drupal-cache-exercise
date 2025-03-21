@@ -14,5 +14,7 @@
  * @ingroup themeable
  */
 #}
-{{~ title ~}}
-{{~ link ~}}
+{% apply spaceless %}
+  {{ title }}
+  {{ link }}
+{% endapply %}

@@ -305,10 +305,10 @@ abstract class EntityBase implements EntityInterface {
       try {
         $this->toUrl($link_relation_type)->toString(TRUE)->getGeneratedUrl();
       }
-      catch (RouteNotFoundException) {
+      catch (RouteNotFoundException $e) {
         return FALSE;
       }
-      catch (MissingMandatoryParametersException) {
+      catch (MissingMandatoryParametersException $e) {
         return FALSE;
       }
       return TRUE;
@@ -637,7 +637,7 @@ abstract class EntityBase implements EntityInterface {
   /**
    * {@inheritdoc}
    */
-  public function __sleep(): array {
+  public function __sleep() {
     $this->typedData = NULL;
     return $this->traitSleep();
   }

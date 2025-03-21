@@ -169,7 +169,7 @@ class FieldPluginBaseTest extends UnitTestCase {
   /**
    * Sets up the unrouted URL assembler and the link generator.
    */
-  protected function setUpUrlIntegrationServices(): void {
+  protected function setUpUrlIntegrationServices() {
     $this->pathProcessor = $this->createMock('Drupal\Core\PathProcessor\OutboundPathProcessorInterface');
     $this->unroutedUrlAssembler = new UnroutedUrlAssembler($this->requestStack, $this->pathProcessor);
 
@@ -197,7 +197,7 @@ class FieldPluginBaseTest extends UnitTestCase {
   /**
    * Sets up a display with empty arguments and fields.
    */
-  protected function setupDisplayWithEmptyArgumentsAndFields(): void {
+  protected function setupDisplayWithEmptyArgumentsAndFields() {
     $this->display->expects($this->any())
       ->method('getHandlers')
       ->willReturnMap([
@@ -858,7 +858,7 @@ class FieldPluginBaseTest extends UnitTestCase {
 
 class FieldPluginBaseTestField extends FieldPluginBase {
 
-  public function setLinkGenerator(LinkGeneratorInterface $link_generator): void {
+  public function setLinkGenerator(LinkGeneratorInterface $link_generator) {
     $this->linkGenerator = $link_generator;
   }
 

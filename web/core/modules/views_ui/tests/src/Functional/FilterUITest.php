@@ -8,8 +8,10 @@ namespace Drupal\Tests\views_ui\Functional;
  * Tests for the filters from the UI.
  *
  * @group views_ui
+ * @group #slow
  */
 class FilterUITest extends UITestBase {
+
 
   /**
    * Views used by this test.

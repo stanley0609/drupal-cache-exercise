@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\update_test;
 
 use Drupal\Core\FileTransfer\Local;

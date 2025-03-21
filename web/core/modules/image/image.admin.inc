@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Administration pages for image settings.
  */
 
 use Drupal\Core\Render\Element;
@@ -15,7 +16,7 @@ use Drupal\Core\Render\Element;
  *   An associative array containing:
  *   - style: \Drupal\image\ImageStyleInterface image style being previewed.
  */
-function template_preprocess_image_style_preview(&$variables): void {
+function template_preprocess_image_style_preview(&$variables) {
 
   /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
   $file_url_generator = \Drupal::service('file_url_generator');
@@ -80,10 +81,7 @@ function template_preprocess_image_style_preview(&$variables): void {
   $variables['original']['rendered'] = [
     '#theme' => 'image',
     '#uri' => $original_path,
-    '#alt' => t('Source image: @width pixels wide, @height pixels high', [
-      '@width' => $variables['original']['width'],
-      '@height' => $variables['original']['height'],
-    ]),
+    '#alt' => t('Sample original image'),
     '#title' => '',
     '#attributes' => [
       'width' => $variables['original']['width'],
@@ -97,10 +95,7 @@ function template_preprocess_image_style_preview(&$variables): void {
   $variables['derivative']['rendered'] = [
     '#theme' => 'image',
     '#uri' => $variables['derivative']['url'] . '?cache_bypass=' . $variables['cache_bypass'] . '&itok=' . $variables['itok'],
-    '#alt' => t('Derivative image: @width pixels wide, @height pixels high', [
-      '@width' => $variables['derivative']['width'],
-      '@height' => $variables['derivative']['height'],
-    ]),
+    '#alt' => t('Sample modified image'),
     '#title' => '',
     '#attributes' => [
       'width' => $variables['derivative']['width'],
@@ -120,7 +115,7 @@ function template_preprocess_image_style_preview(&$variables): void {
  *   An associative array containing:
  *   - element: An associative array containing the image.
  */
-function template_preprocess_image_anchor(&$variables): void {
+function template_preprocess_image_anchor(&$variables) {
   $element = $variables['element'];
 
   $rows = [];

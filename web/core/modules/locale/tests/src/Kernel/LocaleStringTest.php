@@ -211,7 +211,7 @@ class LocaleStringTest extends KernelTestBase {
    * @return array
    *   Translation list.
    */
-  protected function createAllTranslations(StringInterface $source, array $values = []): array {
+  protected function createAllTranslations(StringInterface $source, array $values = []) {
     $list = [];
     /** @var \Drupal\Core\Language\LanguageManagerInterface $language_manager */
     $language_manager = $this->container->get('language_manager');

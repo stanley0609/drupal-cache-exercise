@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Provides the Views' administrative interface.
  */
 
 use Drupal\Component\Utility\NestedArray;

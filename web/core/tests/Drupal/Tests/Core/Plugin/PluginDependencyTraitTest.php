@@ -181,11 +181,11 @@ class TestPluginDependency {
 
   protected $themeHandler;
 
-  public function setModuleHandler(ModuleHandlerInterface $module_handler): void {
+  public function setModuleHandler(ModuleHandlerInterface $module_handler) {
     $this->moduleHandler = $module_handler;
   }
 
-  public function setThemeHandler(ThemeHandlerInterface $theme_handler): void {
+  public function setThemeHandler(ThemeHandlerInterface $theme_handler) {
     $this->themeHandler = $theme_handler;
   }
 

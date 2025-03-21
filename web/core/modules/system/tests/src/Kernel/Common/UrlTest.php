@@ -168,17 +168,17 @@ class UrlTest extends KernelTestBase {
   /**
    * Checks for class existence in link.
    *
-   * @param string $attribute
+   * @param $attribute
    *   Attribute to be checked.
-   * @param string $link
+   * @param $link
    *   URL to search.
-   * @param string $class
+   * @param $class
    *   Element class to search for.
    *
    * @return bool
    *   TRUE if the class is found, FALSE otherwise.
    */
-  private function hasAttribute($attribute, $link, $class): bool {
+  private function hasAttribute($attribute, $link, $class) {
     return (bool) preg_match('|' . $attribute . '="([^\"\s]+\s+)*' . $class . '|', $link);
   }
 

@@ -200,7 +200,7 @@ class CommentTypeTest extends CommentTestBase {
       $this->addDefaultCommentField('comment', 'comment', 'bar');
       $this->fail('Exception not thrown.');
     }
-    catch (\InvalidArgumentException) {
+    catch (\InvalidArgumentException $e) {
       // Expected exception; just continue testing.
     }
 

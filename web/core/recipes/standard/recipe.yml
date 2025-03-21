@@ -36,10 +36,6 @@ install:
   - views_ui
   - shortcut
 config:
-  # This recipe is intended to set up a full site from scratch, fulfilling certain
-  # expectations. It's not really designed to be a building block. Therefore, treat
-  # all of the config strictly.
-  strict: true
   import:
     claro:
       - block.block.claro_help
@@ -102,5 +98,5 @@ config:
     user.settings:
       simpleConfigUpdate:
         verify_mail: true
-        register: admin_only
+        register: visitors_admin_approval
         cancel_method: user_cancel_block

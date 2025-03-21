@@ -11,6 +11,7 @@ use Drupal\image\Entity\ImageStyle;
  * JSON:API integration test for the "ImageStyle" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class ImageStyleTest extends ConfigEntityResourceTestBase {
 
@@ -51,7 +52,7 @@ class ImageStyleTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     $this->grantPermissionsToTestedRole(['administer image styles']);
   }
 
@@ -84,7 +85,7 @@ class ImageStyleTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/image_style/image_style/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     return [
       'jsonapi' => [
@@ -130,7 +131,7 @@ class ImageStyleTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
     return [];
   }

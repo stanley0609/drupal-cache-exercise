@@ -15,7 +15,7 @@ class Graph {
   /**
    * Instantiates the depth first search object.
    *
-   * @param array $graph
+   * @param $graph
    *   A three dimensional associated array, with the first keys being the names
    *   of the vertices, these can be strings or numbers. The second key is
    *   'edges' and the third one are again vertices, each such key representing
@@ -87,13 +87,13 @@ class Graph {
   /**
    * Performs a depth-first search on a graph.
    *
-   * @param array $state
+   * @param $state
    *   An associative array. The key 'last_visit_order' stores a list of the
    *   vertices visited. The key components stores list of vertices belonging
    *   to the same the component.
-   * @param string|int $start
+   * @param $start
    *   An arbitrary vertex where we started traversing the graph.
-   * @param string|int|null $component
+   * @param $component
    *   The component of the last vertex.
    *
    * @see \Drupal\Component\Graph\Graph::searchAndSort()

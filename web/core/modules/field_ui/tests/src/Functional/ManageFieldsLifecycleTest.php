@@ -12,6 +12,7 @@ use Drupal\field\Entity\FieldStorageConfig;
  * Tests the Field UI "Manage fields" screen.
  *
  * @group field_ui
+ * @group #slow
  */
 class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
 
@@ -38,7 +39,7 @@ class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
    * @param string $type
    *   (optional) The name of a content type.
    */
-  protected function manageFieldsPage($type = ''): void {
+  protected function manageFieldsPage($type = '') {
     $type = empty($type) ? $this->contentType : $type;
     $this->drupalGet('admin/structure/types/manage/' . $type . '/fields');
     // Check all table columns.
@@ -80,7 +81,7 @@ class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
    * @todo Assert properties can be set in the form and read back in
    * $field_storage and $fields.
    */
-  protected function createField(): void {
+  protected function createField() {
     // Create a test field.
     $this->fieldUIAddNewField('admin/structure/types/manage/' . $this->contentType, $this->fieldNameInput, $this->fieldLabel);
   }
@@ -88,7 +89,7 @@ class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
   /**
    * Tests editing an existing field.
    */
-  protected function updateField(): void {
+  protected function updateField() {
     $field_id = 'node.' . $this->contentType . '.' . $this->fieldName;
     // Go to the field edit page.
     $this->drupalGet('admin/structure/types/manage/' . $this->contentType . '/fields/' . $field_id);
@@ -113,7 +114,7 @@ class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
   /**
    * Tests adding an existing field in another content type.
    */
-  protected function addExistingField(): void {
+  protected function addExistingField() {
     // Check "Re-use existing field" appears.
     $this->drupalGet('admin/structure/types/manage/page/fields');
     $this->assertSession()->pageTextContains('Re-use an existing field');
@@ -134,7 +135,7 @@ class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
    * We do not test if the number can be submitted with anything else than a
    * numeric value. That is tested already in FormTest::testNumber().
    */
-  protected function cardinalitySettings(): void {
+  protected function cardinalitySettings() {
     $field_edit_path = 'admin/structure/types/manage/article/fields/node.article.body';
 
     // Assert the cardinality other field cannot be empty when cardinality is
@@ -264,7 +265,7 @@ class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
   /**
    * Tests deleting a field from the field edit form.
    */
-  protected function deleteField(): void {
+  protected function deleteField() {
     // Delete the field.
     $field_id = 'node.' . $this->contentType . '.' . $this->fieldName;
     $this->drupalGet('admin/structure/types/manage/' . $this->contentType . '/fields/' . $field_id);
@@ -275,7 +276,7 @@ class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
   /**
    * Tests that persistent field storage appears in the field UI.
    */
-  protected function addPersistentFieldStorage(): void {
+  protected function addPersistentFieldStorage() {
     $field_storage = FieldStorageConfig::loadByName('node', $this->fieldName);
     // Persist the field storage even if there are no fields.
     $field_storage->set('persist_with_no_fields', TRUE)->save();
@@ -323,7 +324,7 @@ class ManageFieldsLifecycleTest extends ManageFieldsFunctionalTestBase {
   /**
    * Tests that the field list administration page operates correctly.
    */
-  protected function fieldListAdminPage(): void {
+  protected function fieldListAdminPage() {
     $this->drupalGet('admin/reports/fields');
     $this->assertSession()->pageTextContains($this->fieldName);
     $this->assertSession()->linkByHrefExists('admin/structure/types/manage/' . $this->contentType . '/fields');

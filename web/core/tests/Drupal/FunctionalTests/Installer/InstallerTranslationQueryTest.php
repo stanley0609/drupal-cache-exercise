@@ -28,7 +28,7 @@ class InstallerTranslationQueryTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function visitInstaller(): void {
+  protected function visitInstaller() {
     // Place a custom local translation in the translations directory.
     mkdir($this->root . '/' . $this->siteDirectory . '/files/translations', 0777, TRUE);
     file_put_contents($this->root . '/' . $this->siteDirectory . '/files/translations/drupal-8.0.0.de.po', $this->getPo('de'));
@@ -49,7 +49,7 @@ class InstallerTranslationQueryTest extends InstallerTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpLanguage(): void {
+  protected function setUpLanguage() {
     // The language was preset by passing a query parameter in the URL, so no
     // explicit language selection is necessary.
   }
@@ -63,8 +63,7 @@ class InstallerTranslationQueryTest extends InstallerTestBase {
 
     // Verify German was configured but not English.
     $this->drupalGet('admin/config/regional/language');
-    // cspell:ignore deutsch
-    $this->assertSession()->pageTextContains('Deutsch');
+    $this->assertSession()->pageTextContains('German');
     $this->assertSession()->pageTextNotContains('English');
   }
 
@@ -77,7 +76,7 @@ class InstallerTranslationQueryTest extends InstallerTestBase {
    * @return string
    *   Contents for the test .po file.
    */
-  protected function getPo($langcode): string {
+  protected function getPo($langcode) {
     return <<<PO
 msgid ""
 msgstr ""

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\session_test\Session;
 
 /**
@@ -39,7 +37,8 @@ class TestSessionHandlerProxy implements \SessionHandlerInterface {
   /**
    * {@inheritdoc}
    */
-  public function open($save_path, $name): bool {
+  #[\ReturnTypeWillChange]
+  public function open($save_path, $name) {
     $trace = \Drupal::service('session_test.session_handler_proxy_trace');
     $trace[] = ['BEGIN', $this->optionalArgument, __FUNCTION__];
     $result = $this->sessionHandler->open($save_path, $name);
@@ -50,7 +49,8 @@ class TestSessionHandlerProxy implements \SessionHandlerInterface {
   /**
    * {@inheritdoc}
    */
-  public function close(): bool {
+  #[\ReturnTypeWillChange]
+  public function close() {
     $trace = \Drupal::service('session_test.session_handler_proxy_trace');
     $trace[] = ['BEGIN', $this->optionalArgument, __FUNCTION__];
     $result = $this->sessionHandler->close();
@@ -61,7 +61,8 @@ class TestSessionHandlerProxy implements \SessionHandlerInterface {
   /**
    * {@inheritdoc}
    */
-  public function read($session_id): string|FALSE {
+  #[\ReturnTypeWillChange]
+  public function read($session_id) {
     $trace = \Drupal::service('session_test.session_handler_proxy_trace');
     $trace[] = ['BEGIN', $this->optionalArgument, __FUNCTION__, $session_id];
     $result = $this->sessionHandler->read($session_id);
@@ -72,7 +73,8 @@ class TestSessionHandlerProxy implements \SessionHandlerInterface {
   /**
    * {@inheritdoc}
    */
-  public function write($session_id, $session_data): bool {
+  #[\ReturnTypeWillChange]
+  public function write($session_id, $session_data) {
     $trace = \Drupal::service('session_test.session_handler_proxy_trace');
     $trace[] = ['BEGIN', $this->optionalArgument, __FUNCTION__, $session_id];
     $result = $this->sessionHandler->write($session_id, $session_data);
@@ -83,14 +85,16 @@ class TestSessionHandlerProxy implements \SessionHandlerInterface {
   /**
    * {@inheritdoc}
    */
-  public function destroy($session_id): bool {
+  #[\ReturnTypeWillChange]
+  public function destroy($session_id) {
     return $this->sessionHandler->destroy($session_id);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function gc($max_lifetime): int|FALSE {
+  #[\ReturnTypeWillChange]
+  public function gc($max_lifetime) {
     return $this->sessionHandler->gc($max_lifetime);
   }
 

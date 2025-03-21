@@ -6,7 +6,6 @@ use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\RouteProcessor\OutboundRouteProcessorInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Route;
 
 /**
@@ -15,20 +14,20 @@ use Symfony\Component\Routing\Route;
 class RouteProcessorCsrf implements OutboundRouteProcessorInterface, TrustedCallbackInterface {
 
   /**
+   * The CSRF token generator.
+   *
+   * @var \Drupal\Core\Access\CsrfTokenGenerator
+   */
+  protected $csrfToken;
+
+  /**
    * Constructs a RouteProcessorCsrf object.
    *
-   * @param \Drupal\Core\Access\CsrfTokenGenerator $csrfToken
+   * @param \Drupal\Core\Access\CsrfTokenGenerator $csrf_token
    *   The CSRF token generator.
-   * @param \Symfony\Component\HttpFoundation\RequestStack|null $requestStack
-   *   The request stack.
    */
-  public function __construct(
-    protected CsrfTokenGenerator $csrfToken,
-    protected ?RequestStack $requestStack = NULL,
-  ) {
-    if ($requestStack === NULL) {
-      $this->requestStack = \Drupal::service('request_stack');
-    }
+  public function __construct(CsrfTokenGenerator $csrf_token) {
+    $this->csrfToken = $csrf_token;
   }
 
   /**
@@ -43,7 +42,7 @@ class RouteProcessorCsrf implements OutboundRouteProcessorInterface, TrustedCall
       }
       // Adding this to the parameters means it will get merged into the query
       // string when the route is compiled.
-      if (!$bubbleable_metadata || $this->requestStack->getCurrentRequest()->getRequestFormat() !== 'html') {
+      if (!$bubbleable_metadata) {
         $parameters['token'] = $this->csrfToken->get($path);
       }
       else {
@@ -52,6 +51,7 @@ class RouteProcessorCsrf implements OutboundRouteProcessorInterface, TrustedCall
         $placeholder_render_array = [
           '#lazy_builder' => ['route_processor_csrf:renderPlaceholderCsrfToken', [$path]],
         ];
+
         // Instead of setting an actual CSRF token as the query string, we set
         // the placeholder, which will be replaced at the very last moment. This
         // ensures links with CSRF tokens don't break cacheability.

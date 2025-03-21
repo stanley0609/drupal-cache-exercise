@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Interface translation summary, editing and deletion user interfaces.
  */
 
 use Drupal\Core\Link;
@@ -21,7 +22,7 @@ use Drupal\Core\Url;
  *
  * @see \Drupal\locale\Form\TranslationStatusForm
  */
-function template_preprocess_locale_translation_update_info(array &$variables): void {
+function template_preprocess_locale_translation_update_info(array &$variables) {
   foreach ($variables['updates'] as $update) {
     $variables['modules'][] = $update['name'];
   }
@@ -43,7 +44,7 @@ function template_preprocess_locale_translation_update_info(array &$variables): 
  *
  * @see \Drupal\locale\Form\TranslationStatusForm
  */
-function template_preprocess_locale_translation_last_check(array &$variables): void {
+function template_preprocess_locale_translation_last_check(array &$variables) {
   $last = $variables['last'];
   $variables['last_checked'] = ($last != NULL);
   $variables['time'] = $variables['last_checked'] ? \Drupal::service('date.formatter')->formatTimeDiffSince($last) : NULL;

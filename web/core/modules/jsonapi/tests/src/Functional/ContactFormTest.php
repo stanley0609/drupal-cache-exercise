@@ -11,6 +11,7 @@ use Drupal\Core\Url;
  * JSON:API integration test for the "ContactForm" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class ContactFormTest extends ConfigEntityResourceTestBase {
 
@@ -44,7 +45,7 @@ class ContactFormTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     $this->grantPermissionsToTestedRole(['access site-wide contact form']);
   }
 
@@ -70,7 +71,7 @@ class ContactFormTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/contact_form/contact_form/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     return [
       'jsonapi' => [
@@ -112,7 +113,7 @@ class ContactFormTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
     return [];
   }
@@ -120,7 +121,7 @@ class ContactFormTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedUnauthorizedAccessMessage($method): string {
+  protected function getExpectedUnauthorizedAccessMessage($method) {
     return "The 'access site-wide contact form' permission is required.";
   }
 

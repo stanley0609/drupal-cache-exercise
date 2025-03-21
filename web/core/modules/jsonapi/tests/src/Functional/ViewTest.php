@@ -11,6 +11,7 @@ use Drupal\views\Entity\View;
  * JSON:API integration test for the "View" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class ViewTest extends ConfigEntityResourceTestBase {
 
@@ -44,7 +45,7 @@ class ViewTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     $this->grantPermissionsToTestedRole(['administer views']);
   }
 
@@ -63,7 +64,7 @@ class ViewTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/view/view/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     return [
       'jsonapi' => [
@@ -121,7 +122,7 @@ class ViewTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
     return [];
   }

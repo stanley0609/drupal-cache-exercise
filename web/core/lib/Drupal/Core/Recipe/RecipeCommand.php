@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Drupal\Core\Recipe;
 
 use Drupal\Component\Render\PlainTextOutput;
-use Drupal\Core\Command\BootableCommandTrait;
 use Drupal\Core\Config\Checkpoint\Checkpoint;
 use Drupal\Core\Config\ConfigImporter;
 use Drupal\Core\Config\ConfigImporterException;
 use Drupal\Core\Config\StorageComparer;
+use Drupal\Core\DrupalKernel;
+use Drupal\Core\Site\Settings;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LogLevel;
 use Symfony\Component\Console\Command\Command;
@@ -18,6 +19,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Applies recipe.
@@ -27,7 +29,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 final class RecipeCommand extends Command {
 
-  use BootableCommandTrait;
+  /**
+   * The class loader.
+   *
+   * @var object
+   */
+  protected $classLoader;
 
   /**
    * Constructs a new RecipeCommand command.
@@ -47,8 +54,6 @@ final class RecipeCommand extends Command {
     $this
       ->setDescription('Applies a recipe to a site.')
       ->addArgument('path', InputArgument::REQUIRED, 'The path to the recipe\'s folder to apply');
-
-    ConsoleInputCollector::configureCommand($this);
   }
 
   /**
@@ -68,11 +73,6 @@ final class RecipeCommand extends Command {
     /** @var \Drupal\Core\Config\Checkpoint\CheckpointStorageInterface $checkpoint_storage */
     $checkpoint_storage = $container->get('config.storage.checkpoint');
     $recipe = Recipe::createFromDirectory($recipe_path);
-
-    // Collect input for this recipe and all the recipes it directly and
-    // indirectly applies.
-    $recipe->input->collectAll(new ConsoleInputCollector($input, $io));
-
     if ($checkpoint_storage instanceof LoggerAwareInterface) {
       $logger = new ConsoleLogger($output, [
         // The checkpoint storage logs a notice if it decides to not create a
@@ -180,6 +180,38 @@ final class RecipeCommand extends Command {
       $container->get('extension.list.theme'),
     );
     $config_importer->import();
+  }
+
+  /**
+   * Boots up a Drupal environment.
+   *
+   * @return \Drupal\Core\DrupalKernelInterface
+   *   The Drupal kernel.
+   *
+   * @throws \Exception
+   *   Exception thrown if kernel does not boot.
+   */
+  protected function boot() {
+    $kernel = new DrupalKernel('prod', $this->classLoader);
+    $kernel::bootEnvironment();
+    $kernel->setSitePath($this->getSitePath());
+    Settings::initialize($kernel->getAppRoot(), $kernel->getSitePath(), $this->classLoader);
+    $kernel->boot();
+    $kernel->preHandle(Request::createFromGlobals());
+    return $kernel;
+  }
+
+  /**
+   * Gets the site path.
+   *
+   * Defaults to 'sites/default'. For testing purposes this can be overridden
+   * using the DRUPAL_DEV_SITE_PATH environment variable.
+   *
+   * @return string
+   *   The site path to use.
+   */
+  protected function getSitePath() {
+    return getenv('DRUPAL_DEV_SITE_PATH') ?: 'sites/default';
   }
 
 }

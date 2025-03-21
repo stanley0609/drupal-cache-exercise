@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\menu_test\Access;
 
 use Drupal\Core\Access\AccessResult;

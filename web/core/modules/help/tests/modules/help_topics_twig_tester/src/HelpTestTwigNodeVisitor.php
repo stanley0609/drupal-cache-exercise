@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\help_topics_twig_tester;
 
 use Drupal\Core\Template\TwigNodeTrans;
@@ -110,7 +108,7 @@ class HelpTestTwigNodeVisitor implements NodeVisitorInterface {
    * @return string
    *   Text in the node.
    */
-  protected function extractText(TwigNodeTrans $node): string {
+  protected function extractText(TwigNodeTrans $node) {
     // Extract the singular/body and optional plural text from the
     // TwigNodeTrans object.
     $bodies = $node->getNode('body');

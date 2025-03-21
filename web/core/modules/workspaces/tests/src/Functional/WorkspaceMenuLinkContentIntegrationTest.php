@@ -33,7 +33,6 @@ class WorkspaceMenuLinkContentIntegrationTest extends BrowserTestBase {
     'menu_ui',
     'node',
     'workspaces',
-    'workspaces_ui',
   ];
 
   /**

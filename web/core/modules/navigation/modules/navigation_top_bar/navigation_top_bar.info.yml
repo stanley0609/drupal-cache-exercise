@@ -6,4 +6,3 @@ lifecycle: experimental
 version: VERSION
 dependencies:
   - navigation:navigation
-hidden: true

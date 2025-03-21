@@ -99,7 +99,6 @@ internal.drupal.ckeditor5.filter.admin:
     - core/once
     - core/drupal.ajax
     - core/drupalSettings
-    - core/drupal.vertical-tabs
 
 internal.drupal.ckeditor5.table:
   css:

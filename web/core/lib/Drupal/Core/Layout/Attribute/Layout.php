@@ -26,9 +26,9 @@ class Layout extends Plugin {
   /**
    * Any additional properties and values.
    *
-   * @var array
-   *
    * @see \Drupal\Core\Layout\LayoutDefinition::$additional
+   *
+   * @var array
    */
   public readonly array $additional;
 

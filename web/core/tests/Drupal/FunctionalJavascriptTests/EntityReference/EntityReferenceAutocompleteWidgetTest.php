@@ -207,7 +207,7 @@ class EntityReferenceAutocompleteWidgetTest extends WebDriverTestBase {
    * @param string $field_name
    *   The field name.
    */
-  protected function doAutocomplete($field_name): void {
+  protected function doAutocomplete($field_name) {
     $autocomplete_field = $this->getSession()->getPage()->findField($field_name . '[0][target_id]');
     $autocomplete_field->setValue('Test');
     $this->getSession()->getDriver()->keyDown($autocomplete_field->getXpath(), ' ');

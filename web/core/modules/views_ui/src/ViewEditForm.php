@@ -477,7 +477,7 @@ class ViewEditForm extends ViewFormBase {
                 $url = Url::fromUri("base:$path");
               }
             }
-            catch (BadRequestException | NotAcceptableHttpException) {
+            catch (BadRequestException | NotAcceptableHttpException $e) {
               $url = '/' . $path;
             }
 

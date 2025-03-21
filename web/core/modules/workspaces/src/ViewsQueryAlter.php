@@ -311,7 +311,7 @@ class ViewsQueryAlter implements ContainerInjectionInterface {
     // Construct the join.
     $definition = [
       'table' => 'workspace_association',
-      'field' => WorkspaceAssociation::getIdField($entity_type_id),
+      'field' => 'target_entity_id',
       'left_table' => $relationship,
       'left_field' => $table_data['table']['base']['field'],
       'extra' => [

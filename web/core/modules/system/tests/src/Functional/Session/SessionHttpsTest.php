@@ -122,7 +122,7 @@ class SessionHttpsTest extends BrowserTestBase {
    *
    * Note that the parents $session_id and $loggedInUser is not updated.
    */
-  protected function loginHttp(AccountInterface $account): void {
+  protected function loginHttp(AccountInterface $account) {
     $guzzle_cookie_jar = $this->getGuzzleCookieJar();
     $post = [
       'form_id' => 'user_login_form',
@@ -173,7 +173,7 @@ class SessionHttpsTest extends BrowserTestBase {
    *
    * Note that the parents $session_id and $loggedInUser is not updated.
    */
-  protected function loginHttps(AccountInterface $account): void {
+  protected function loginHttps(AccountInterface $account) {
     $guzzle_cookie_jar = $this->getGuzzleCookieJar();
     $post = [
       'form_id' => 'user_login_form',
@@ -230,7 +230,7 @@ class SessionHttpsTest extends BrowserTestBase {
    * @return string
    *   The internal path from the location header on the response.
    */
-  protected function getPathFromLocationHeader(ResponseInterface $response, $https = FALSE): string {
+  protected function getPathFromLocationHeader(ResponseInterface $response, $https = FALSE) {
     if ($https) {
       $base_url = str_replace('http://', 'https://', $this->baseUrl);
     }
@@ -268,26 +268,26 @@ class SessionHttpsTest extends BrowserTestBase {
   /**
    * Builds a URL for submitting a mock HTTPS request to HTTP test environments.
    *
-   * @param string $url
+   * @param $url
    *   A Drupal path such as 'user/login'.
    *
    * @return string
    *   URL prepared for the https.php mock front controller.
    */
-  protected function httpsUrl($url): string {
+  protected function httpsUrl($url) {
     return 'core/modules/system/tests/https.php/' . $url;
   }
 
   /**
    * Builds a URL for submitting a mock HTTP request to HTTPS test environments.
    *
-   * @param string $url
+   * @param $url
    *   A Drupal path such as 'user/login'.
    *
    * @return string
    *   URL prepared for the http.php mock front controller.
    */
-  protected function httpUrl($url): string {
+  protected function httpUrl($url) {
     return 'core/modules/system/tests/http.php/' . $url;
   }
 
@@ -312,7 +312,7 @@ class SessionHttpsTest extends BrowserTestBase {
    * @return string
    *   The form build ID for the user login form.
    */
-  protected function getUserLoginFormBuildId(): string {
+  protected function getUserLoginFormBuildId() {
     $this->drupalGet('user/login');
     return (string) $this->getSession()->getPage()->findField('form_build_id');
   }

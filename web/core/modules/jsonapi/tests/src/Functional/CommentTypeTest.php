@@ -11,6 +11,7 @@ use Drupal\Core\Url;
  * JSON:API integration test for the "CommentType" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class CommentTypeTest extends ConfigEntityResourceTestBase {
 
@@ -44,7 +45,7 @@ class CommentTypeTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     $this->grantPermissionsToTestedRole(['administer comment types']);
   }
 
@@ -68,7 +69,7 @@ class CommentTypeTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/comment_type/comment_type/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     return [
       'jsonapi' => [
@@ -104,7 +105,7 @@ class CommentTypeTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
     return [];
   }

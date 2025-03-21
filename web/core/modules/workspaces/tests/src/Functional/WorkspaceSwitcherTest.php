@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\workspaces\Functional;
 
+use Drupal\Core\Url;
 use Drupal\dynamic_page_cache\EventSubscriber\DynamicPageCacheSubscriber;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\system\Functional\Cache\AssertPageCacheContextsAndTagsTrait;
@@ -24,10 +25,8 @@ class WorkspaceSwitcherTest extends BrowserTestBase {
   protected static $modules = [
     'block',
     'dynamic_page_cache',
-    'node',
     'toolbar',
     'workspaces',
-    'workspaces_ui',
   ];
 
   /**
@@ -105,16 +104,14 @@ class WorkspaceSwitcherTest extends BrowserTestBase {
    * Tests that the toolbar workspace switcher doesn't disable the page cache.
    */
   public function testToolbarSwitcherDynamicPageCache(): void {
-    $node_type = $this->drupalCreateContentType();
-    $node = $this->drupalCreateNode(['type' => $node_type->id()]);
     $this->drupalLogin($this->drupalCreateUser([
       'access toolbar',
       'view any workspace',
     ]));
-    $this->drupalGet($node->toUrl());
+    // Front-page is visited right after login.
     $this->assertSession()->responseHeaderEquals(DynamicPageCacheSubscriber::HEADER, 'MISS');
     // Reload the page, it should be cached now.
-    $this->drupalGet($node->toUrl());
+    $this->drupalGet(Url::fromRoute('<front>'));
     $this->assertSession()->elementExists('css', '.workspaces-toolbar-tab');
     $this->assertSession()->responseHeaderEquals(DynamicPageCacheSubscriber::HEADER, 'HIT');
   }

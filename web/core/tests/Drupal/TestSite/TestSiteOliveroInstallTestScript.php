@@ -12,7 +12,7 @@ use Drupal\comment\Entity\Comment;
 /**
  * Setup file used by TestSiteInstallTestScript.
  *
- * @see \Drupal\KernelTests\Scripts\TestSiteApplicationTest
+ * @see \Drupal\Tests\Scripts\TestSiteApplicationTest
  */
 class TestSiteOliveroInstallTestScript implements TestSetupInterface {
 

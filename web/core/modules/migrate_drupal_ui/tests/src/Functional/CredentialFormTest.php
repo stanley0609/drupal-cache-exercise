@@ -16,7 +16,6 @@ use Drupal\Tests\migrate_drupal\Traits\CreateTestContentEntitiesTrait;
  * credentials, and incorrect file paths.
  *
  * @group migrate_drupal_ui
- * @group #slow
  */
 class CredentialFormTest extends MigrateUpgradeTestBase {
 
@@ -103,7 +102,7 @@ class CredentialFormTest extends MigrateUpgradeTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getSourceBasePath(): string {
+  protected function getSourceBasePath() {
     $version = $this->getLegacyDrupalVersion($this->sourceDatabase);
     return __DIR__ . '/d' . $version . '/files';
   }
@@ -111,28 +110,28 @@ class CredentialFormTest extends MigrateUpgradeTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getAvailablePaths(): array {
+  protected function getAvailablePaths() {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getEntityCounts(): array {
+  protected function getEntityCounts() {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getEntityCountsIncremental(): array {
+  protected function getEntityCountsIncremental() {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getMissingPaths(): array {
+  protected function getMissingPaths() {
     return [];
   }
 
@@ -147,7 +146,7 @@ class CredentialFormTest extends MigrateUpgradeTestBase {
    *
    * @see \Drupal\migrate_drupal_ui\Form\CredentialForm
    */
-  protected function getDestinationSiteCredentials(): array {
+  protected function getDestinationSiteCredentials() {
     $connection_options = \Drupal::database()->getConnectionOptions();
     $version = $this->getLegacyDrupalVersion($this->sourceDatabase);
     $driver = $connection_options['driver'];

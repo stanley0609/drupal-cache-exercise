@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Provides support for field data purge after mass deletion.
  */
 
 use Drupal\Core\Field\FieldDefinitionInterface;

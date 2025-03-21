@@ -78,10 +78,19 @@ class FilterFormatListBuilder extends DraggableListBuilder {
   /**
    * {@inheritdoc}
    */
+  public function load() {
+    // Only list enabled filters.
+    return array_filter(parent::load(), function ($entity) {
+      return $entity->status();
+    });
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildHeader() {
     $header['label'] = $this->t('Name');
     $header['roles'] = $this->t('Roles');
-    $header['status'] = $this->t('Status');
     return $header + parent::buildHeader();
   }
 
@@ -115,13 +124,7 @@ class FilterFormatListBuilder extends DraggableListBuilder {
         '#context' => ['list_style' => 'comma-list'],
       ];
     }
-    if ($entity->status()) {
-      $status = $this->t('Enabled');
-    }
-    else {
-      $status = $this->t('Disabled');
-    }
-    $row['status']['#markup'] = $status;
+
     return $row + parent::buildRow($entity);
   }
 
@@ -138,16 +141,6 @@ class FilterFormatListBuilder extends DraggableListBuilder {
     // The fallback format may not be disabled.
     if ($entity->isFallbackFormat()) {
       unset($operations['disable']);
-    }
-
-    // Remove disable and edit operations for disabled formats.
-    if (!$entity->status()) {
-      if (isset($operations['disable'])) {
-        unset($operations['disable']);
-      }
-      if (isset($operations['edit'])) {
-        unset($operations['edit']);
-      }
     }
 
     return $operations;

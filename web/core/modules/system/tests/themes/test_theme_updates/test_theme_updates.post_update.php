@@ -5,8 +5,6 @@
  * Update functions for the theme.
  */
 
-declare(strict_types=1);
-
 /**
  * Tests post updates for themes.
  */

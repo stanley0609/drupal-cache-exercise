@@ -5,15 +5,13 @@
  * Test to ensure theme compatibility with managed files.
  */
 
-declare(strict_types=1);
-
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
-function test_theme_settings_form_system_theme_settings_alter(&$form, FormStateInterface $form_state): void {
+function test_theme_settings_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
   $form['custom_logo'] = [
     '#type' => 'managed_file',
     '#title' => t('Secondary logo.'),

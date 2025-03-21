@@ -61,7 +61,7 @@ class StringFieldTest extends BrowserTestBase {
   /**
    * Helper function for testTextfieldWidgets().
    */
-  public function _testTextfieldWidgets($field_type, $widget_type): void {
+  public function _testTextfieldWidgets($field_type, $widget_type) {
     // Create a field.
     $field_name = $this->randomMachineName();
     $field_storage = FieldStorageConfig::create([

@@ -60,7 +60,7 @@ class TestConcat extends Concat {
    * @param string $delimiter
    *   The new delimiter.
    */
-  public function setDelimiter($delimiter): void {
+  public function setDelimiter($delimiter) {
     $this->configuration['delimiter'] = $delimiter;
   }
 

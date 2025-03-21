@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Code required only when comparing available updates to existing data.
  */
 
 use Drupal\Core\Extension\ExtensionVersion;
@@ -371,7 +372,7 @@ function update_calculate_project_update_status(&$project_data, $available) {
     try {
       $release_module_version = ExtensionVersion::createFromVersionString($release->getVersion());
     }
-    catch (UnexpectedValueException) {
+    catch (UnexpectedValueException $exception) {
       continue;
     }
     // This release is supported only if it is in a supported branch and is

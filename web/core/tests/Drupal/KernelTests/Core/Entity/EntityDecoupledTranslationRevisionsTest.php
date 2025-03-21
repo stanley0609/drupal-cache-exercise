@@ -288,7 +288,7 @@ class EntityDecoupledTranslationRevisionsTest extends EntityKernelTestBase {
    * @return int
    *   The latest saved revision id.
    */
-  protected function doTestEditSequence($sequence): int {
+  protected function doTestEditSequence($sequence) {
     $revision_id = NULL;
     foreach ($sequence as $index => $step) {
       $this->stepIndex = $index;
@@ -467,7 +467,7 @@ class EntityDecoupledTranslationRevisionsTest extends EntityKernelTestBase {
    * @return string
    *   A revision label.
    */
-  protected function generateNewEntityLabel(ContentEntityInterface $revision, $previous_revision_id, $next = FALSE): string {
+  protected function generateNewEntityLabel(ContentEntityInterface $revision, $previous_revision_id, $next = FALSE) {
     $language_label = $revision->language()->getName();
     $revision_type = $revision->isDefaultRevision() ? 'Default' : 'Pending';
     $revision_id = $next ? $this->storage->getLatestRevisionId($revision->id()) + 1 : $revision->getLoadedRevisionId();
@@ -544,7 +544,7 @@ class EntityDecoupledTranslationRevisionsTest extends EntityKernelTestBase {
    * @param \Drupal\Core\Entity\ContentEntityInterface $entity
    *   An entity object.
    */
-  protected function doTestInternalProperties(ContentEntityInterface $entity): void {
+  protected function doTestInternalProperties(ContentEntityInterface $entity) {
     $this->assertFalse($entity->isValidationRequired());
     $entity->setValidationRequired(TRUE);
     $this->assertTrue($entity->isValidationRequired());

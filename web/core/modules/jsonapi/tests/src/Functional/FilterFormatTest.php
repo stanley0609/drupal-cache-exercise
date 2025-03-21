@@ -11,6 +11,7 @@ use Drupal\filter\Entity\FilterFormat;
  * JSON:API integration test for the "FilterFormat" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class FilterFormatTest extends ConfigEntityResourceTestBase {
 
@@ -44,7 +45,7 @@ class FilterFormatTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     $this->grantPermissionsToTestedRole(['administer filters']);
   }
 
@@ -72,7 +73,7 @@ class FilterFormatTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/filter_format/filter_format/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     return [
       'jsonapi' => [
@@ -120,7 +121,7 @@ class FilterFormatTest extends ConfigEntityResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
     return [];
   }

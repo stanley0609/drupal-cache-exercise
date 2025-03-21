@@ -13,6 +13,7 @@ use Drupal\Tests\taxonomy\Traits\TaxonomyTestTrait;
  * Test the workspace entity.
  *
  * @group workspaces
+ * @group #slow
  */
 class WorkspaceTest extends BrowserTestBase {
 
@@ -32,7 +33,6 @@ class WorkspaceTest extends BrowserTestBase {
     'toolbar',
     'user',
     'workspaces',
-    'workspaces_ui',
   ];
 
   /**

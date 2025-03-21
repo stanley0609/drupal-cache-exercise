@@ -79,7 +79,7 @@ class DateFormatAccessControlHandlerTest extends KernelTestBase {
     \Drupal::setContainer($c);
 
     return [
-      'No permission + unlocked' => [
+      'permissionless + unlocked' => [
         [],
         'unlocked',
         AccessResult::allowed(),
@@ -88,7 +88,7 @@ class DateFormatAccessControlHandlerTest extends KernelTestBase {
         AccessResult::neutral()->addCacheContexts(['user.permissions'])->setReason("The 'administer site configuration' permission is required.")->addCacheTags(['rendered']),
         AccessResult::neutral()->addCacheContexts(['user.permissions'])->setReason("The 'administer site configuration' permission is required."),
       ],
-      'no permission + locked' => [
+      'permissionless + locked' => [
         [],
         'locked',
         AccessResult::allowed(),

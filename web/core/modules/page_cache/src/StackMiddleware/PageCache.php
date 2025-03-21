@@ -20,11 +20,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 class PageCache implements HttpKernelInterface {
 
   /**
-   * Name of Page Cache's response header.
-   */
-  const HEADER = 'X-Drupal-Cache';
-
-  /**
    * The wrapped HTTP kernel.
    *
    * @var \Symfony\Component\HttpKernel\HttpKernelInterface
@@ -88,11 +83,6 @@ class PageCache implements HttpKernelInterface {
     }
     else {
       $response = $this->pass($request, $type, $catch);
-      // Don't indicate non-cacheability on responses to uncacheable requests.
-      // @see https://tools.ietf.org/html/rfc7231#section-4.2.3
-      if ($request->isMethodCacheable()) {
-        $response->headers->set(static::HEADER, 'UNCACHEABLE (request policy)');
-      }
     }
 
     return $response;
@@ -132,7 +122,7 @@ class PageCache implements HttpKernelInterface {
    */
   protected function lookup(Request $request, $type = self::MAIN_REQUEST, $catch = TRUE) {
     if ($response = $this->get($request)) {
-      $response->headers->set(static::HEADER, 'HIT');
+      $response->headers->set('X-Drupal-Cache', 'HIT');
     }
     else {
       $response = $this->fetch($request, $type, $catch);
@@ -203,7 +193,7 @@ class PageCache implements HttpKernelInterface {
     // Only set the 'X-Drupal-Cache' header if caching is allowed for this
     // response.
     if ($this->storeResponse($request, $response)) {
-      $response->headers->set(static::HEADER, 'MISS');
+      $response->headers->set('X-Drupal-Cache', 'MISS');
     }
 
     return $response;
@@ -243,7 +233,6 @@ class PageCache implements HttpKernelInterface {
     //   so by replacing/extending this middleware service or adding another
     //   one.
     if (!$response instanceof CacheableResponseInterface) {
-      $response->headers->set(static::HEADER, 'UNCACHEABLE (no cacheability)');
       return FALSE;
     }
 
@@ -257,7 +246,6 @@ class PageCache implements HttpKernelInterface {
 
     // Allow policy rules to further restrict which responses to cache.
     if ($this->responsePolicy->check($response, $request) === ResponsePolicyInterface::DENY) {
-      $response->headers->set(static::HEADER, 'UNCACHEABLE (response policy)');
       return FALSE;
     }
 

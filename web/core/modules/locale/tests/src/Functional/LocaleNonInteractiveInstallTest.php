@@ -32,7 +32,7 @@ class LocaleNonInteractiveInstallTest extends BrowserTestBase {
    * @return string
    *   The version string to test, for example, '8.0.0' or '8.6.x'.
    */
-  protected function getVersionStringToTest(): string {
+  protected function getVersionStringToTest() {
     include_once $this->root . '/core/includes/install.core.inc';
     $version = _install_get_version_info(\Drupal::VERSION);
     return $version['major'] . '.0.0';

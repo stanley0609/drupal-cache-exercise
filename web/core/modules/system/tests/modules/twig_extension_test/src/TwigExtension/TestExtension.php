@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\twig_extension_test\TwigExtension;
 
 use Twig\Extension\AbstractExtension;

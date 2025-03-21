@@ -10,7 +10,7 @@ use Drupal\filter\Entity\FilterFormat;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\user\RoleInterface;
 use Drupal\user\Entity\User;
-use Symfony\Component\Validator\ConstraintViolationInterface;
+use Symfony\Component\Validator\ConstraintViolation;
 
 /**
  * Test the ckeditor5-stylesheets theme config property.
@@ -62,9 +62,6 @@ class AddedStylesheetsTest extends BrowserTestBase {
     $this->editor = Editor::create([
       'format' => 'llama',
       'editor' => 'ckeditor5',
-      'image_upload' => [
-        'status' => FALSE,
-      ],
       'settings' => [
         'toolbar' => [
           'items' => [],
@@ -73,7 +70,7 @@ class AddedStylesheetsTest extends BrowserTestBase {
     ]);
     $this->editor->save();
     $this->assertSame([], array_map(
-      function (ConstraintViolationInterface $v) {
+      function (ConstraintViolation $v) {
         return (string) $v->getMessage();
       },
       iterator_to_array(CKEditor5::validatePair($this->editor, $filtered_html_format))

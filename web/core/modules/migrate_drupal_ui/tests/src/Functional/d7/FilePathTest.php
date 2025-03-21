@@ -222,7 +222,7 @@ class FilePathTest extends MigrateUpgradeTestBase {
    *
    * The resulting directory is /bar/sites/default/files/foo.txt.
    */
-  protected function makeFiles(): void {
+  protected function makeFiles() {
     // Get file information from the source database.
     foreach ($this->getManagedFiles() as $file) {
       $this->assertSame(1, preg_match('/^(private|public|temporary):/', $file['uri'], $matches));
@@ -289,35 +289,35 @@ class FilePathTest extends MigrateUpgradeTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEntityCounts(): array {
+  protected function getEntityCounts() {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getEntityCountsIncremental(): array {
+  protected function getEntityCountsIncremental() {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getAvailablePaths(): array {
+  protected function getAvailablePaths() {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getMissingPaths(): array {
+  protected function getMissingPaths() {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getSourceBasePath(): string {
+  protected function getSourceBasePath() {
     return '';
   }
 

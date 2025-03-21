@@ -13,6 +13,7 @@ use Drupal\Tests\BrowserTestBase;
  * Verify the search config settings form.
  *
  * @group search
+ * @group #slow
  */
 class SearchConfigSettingsFormTest extends BrowserTestBase {
 
@@ -384,7 +385,7 @@ class SearchConfigSettingsFormTest extends BrowserTestBase {
    * @param bool $enable
    *   Whether the enable link is expected.
    */
-  protected function verifySearchPageOperations($id, $edit, $delete, $disable, $enable): void {
+  protected function verifySearchPageOperations($id, $edit, $delete, $disable, $enable) {
     if ($edit) {
       $this->assertSession()->linkByHrefExists("admin/config/search/pages/manage/$id");
     }
@@ -433,7 +434,7 @@ class SearchConfigSettingsFormTest extends BrowserTestBase {
    * @param string $entity_id
    *   The search page entity ID to enable.
    */
-  protected function setDefaultThroughUi($entity_id): void {
+  protected function setDefaultThroughUi($entity_id) {
     $this->drupalGet('admin/config/search/pages');
     preg_match('|href="([^"]+' . $entity_id . '/set-default[^"]+)"|', $this->getSession()->getPage()->getContent(), $matches);
 

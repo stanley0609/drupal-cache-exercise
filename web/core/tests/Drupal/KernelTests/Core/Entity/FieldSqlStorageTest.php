@@ -9,8 +9,6 @@ use Drupal\Core\Entity\Exception\FieldStorageDefinitionUpdateForbiddenException;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 
-// cspell:ignore basefield
-
 /**
  * Tests Field SQL Storage .
  *
@@ -374,7 +372,7 @@ class FieldSqlStorageTest extends EntityKernelTestBase {
       $field_storage->save();
       $this->fail('Update succeeded.');
     }
-    catch (\Exception) {
+    catch (\Exception $e) {
       // Expected exception; just continue testing.
     }
 

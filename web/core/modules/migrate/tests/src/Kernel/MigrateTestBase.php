@@ -251,7 +251,7 @@ abstract class MigrateTestBase extends KernelTestBase implements MigrateMessageI
   /**
    * Gets the migration plugin.
    *
-   * @param string $plugin_id
+   * @param $plugin_id
    *   The plugin ID of the migration to get.
    *
    * @return \Drupal\migrate\Plugin\Migration

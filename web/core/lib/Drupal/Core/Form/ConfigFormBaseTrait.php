@@ -37,6 +37,7 @@ trait ConfigFormBaseTrait {
    *   not.
    */
   protected function config($name) {
+    /** @var \Drupal\Core\Config\ConfigFactoryInterface $config_factory */
     if (method_exists($this, 'configFactory')) {
       $config_factory = $this->configFactory();
     }

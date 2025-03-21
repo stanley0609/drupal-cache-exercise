@@ -602,7 +602,7 @@ function hook_preprocess(&$variables, $hook) {
  * @param $variables
  *   The variables array (modify in place).
  */
-function hook_preprocess_HOOK(&$variables): void {
+function hook_preprocess_HOOK(&$variables) {
   // This example is from node_preprocess_html(). It adds the node type to
   // the body classes, when on an individual node page or node preview page.
   if (($node = \Drupal::routeMatch()->getParameter('node')) || ($node = \Drupal::routeMatch()->getParameter('node_preview'))) {
@@ -1093,7 +1093,7 @@ function hook_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $asset
  *
  * @see hook_page_attachments_alter()
  */
-function hook_page_attachments(array &$attachments): void {
+function hook_page_attachments(array &$attachments) {
   // Unconditionally attach an asset to the page.
   $attachments['#attached']['library'][] = 'core/drupalSettings';
 
@@ -1119,7 +1119,7 @@ function hook_page_attachments(array &$attachments): void {
  *
  * @see hook_page_attachments()
  */
-function hook_page_attachments_alter(array &$attachments): void {
+function hook_page_attachments_alter(array &$attachments) {
   // Conditionally remove an asset.
   if (in_array('core/jquery', $attachments['#attached']['library'])) {
     $index = array_search('core/jquery', $attachments['#attached']['library']);
@@ -1133,7 +1133,7 @@ function hook_page_attachments_alter(array &$attachments): void {
  * @param array $page_top
  *   A renderable array representing the top of the page.
  */
-function hook_page_top(array &$page_top): void {
+function hook_page_top(array &$page_top) {
   $page_top['my_module'] = ['#markup' => 'This is the top.'];
 }
 
@@ -1143,7 +1143,7 @@ function hook_page_top(array &$page_top): void {
  * @param array $page_bottom
  *   A renderable array representing the bottom of the page.
  */
-function hook_page_bottom(array &$page_bottom): void {
+function hook_page_bottom(array &$page_bottom) {
   $page_bottom['my_module'] = ['#markup' => 'This is the bottom.'];
 }
 
@@ -1248,7 +1248,7 @@ function hook_page_bottom(array &$page_bottom): void {
  * @see themeable
  * @see hook_theme_registry_alter()
  */
-function hook_theme($existing, $type, $theme, $path): array {
+function hook_theme($existing, $type, $theme, $path) {
   return [
     'my_module_display' => [
       'variables' => [

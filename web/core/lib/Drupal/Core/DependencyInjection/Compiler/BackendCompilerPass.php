@@ -35,8 +35,11 @@ class BackendCompilerPass implements CompilerPassInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * phpcs:ignore Drupal.Commenting.FunctionComment.VoidReturn
+   * @return void
    */
-  public function process(ContainerBuilder $container): void {
+  public function process(ContainerBuilder $container) {
     $driver_backend = NULL;
     if ($container->hasParameter('default_backend')) {
       $default_backend = $container->getParameter('default_backend');
@@ -51,7 +54,7 @@ class BackendCompilerPass implements CompilerPassInterface {
         $default_backend = $container->get('database')->databaseType();
         $container->set('database', NULL);
       }
-      catch (\Exception) {
+      catch (\Exception $e) {
         // If Drupal is not installed or a test doesn't define database there
         // is nothing to override.
         return;

@@ -52,7 +52,7 @@ class MenuLinkTreeTest extends UnitTestCase {
   }
 
   /**
-   * Tests build cacheability.
+   * @covers ::build
    *
    * MenuLinkTree::build() gathers both:
    * 1. the tree's access cacheability: the cacheability of the access result
@@ -97,7 +97,6 @@ class MenuLinkTreeTest extends UnitTestCase {
    *
    * @see \Drupal\menu_link_content\Tests\MenuLinkContentCacheabilityBubblingTest
    *
-   * @covers ::build
    * @dataProvider providerTestBuildCacheability
    */
   public function testBuildCacheability($description, $tree, $expected_build, $access, array $access_cache_contexts = []): void {

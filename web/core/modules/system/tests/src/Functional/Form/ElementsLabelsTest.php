@@ -160,7 +160,7 @@ class ElementsLabelsTest extends BrowserTestBase {
   /**
    * Return a form with element with not all properties defined.
    */
-  protected function getFormWithLimitedProperties(): array {
+  protected function getFormWithLimitedProperties() {
     $form = [];
 
     $form['fieldset'] = [

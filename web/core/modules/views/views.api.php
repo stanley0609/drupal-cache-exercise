@@ -5,11 +5,6 @@
  * Describes hooks and plugins provided by the Views module.
  */
 
-use Drupal\views\Analyzer;
-use Drupal\field\FieldStorageConfigInterface;
-use Drupal\views\Plugin\views\pager\Full;
-use Drupal\views\Plugin\views\cache\Time;
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\views\Plugin\views\cache\CachePluginBase;
 use Drupal\views\Plugin\views\PluginBase;
@@ -89,11 +84,11 @@ use Drupal\views\ViewExecutable;
  *   Array of warning messages built by Analyzer::formatMessage to be displayed
  *   to the user following analysis of the view.
  */
-function hook_views_analyze(ViewExecutable $view) {
+function hook_views_analyze(\Drupal\views\ViewExecutable $view) {
   $messages = [];
 
   if ($view->display_handler->options['pager']['type'] == 'none') {
-    $messages[] = Analyzer::formatMessage(t('This view has no pager. This could cause performance issues when the view contains many items.'), 'warning');
+    $messages[] = Drupal\views\Analyzer::formatMessage(t('This view has no pager. This could cause performance issues when the view contains many items.'), 'warning');
   }
 
   return $messages;
@@ -127,7 +122,7 @@ function hook_views_analyze(ViewExecutable $view) {
  *
  * @see hook_views_data_alter()
  */
-function hook_views_data(): array {
+function hook_views_data() {
   // This example describes how to write hook_views_data() for a table defined
   // like this:
   // @code
@@ -318,8 +313,6 @@ function hook_views_data(): array {
       'id' => 'standard',
       // Default label for relationship in the UI.
       'label' => t('Example node'),
-      // Description shown within the add relationship handler in the UI.
-      'help' => t('Relationship between the node and node field data'),
     ],
   ];
 
@@ -502,8 +495,8 @@ function hook_views_data_alter(array &$data) {
   // In Views data definitions, each field can have only one relationship. So
   // rather than adding this relationship directly to the $data['foo']['fid']
   // field entry, which could overwrite an existing relationship, we define
-  // a placeholder field key to handle the relationship.
-  $data['foo']['unique_placeholder_name'] = [
+  // a dummy field key to handle the relationship.
+  $data['foo']['unique_dummy_name'] = [
     'title' => t('Title seen while adding relationship'),
     'help' => t('More information about the relationship'),
 
@@ -513,13 +506,11 @@ function hook_views_data_alter(array &$data) {
       // Database field name in example_table for the join.
       'base field' => 'eid',
       // Real database field name in foo for the join, to override
-      // 'unique_placeholder_name'.
+      // 'unique_dummy_name'.
       'field' => 'fid',
       // ID of relationship handler plugin to use.
       'id' => 'standard',
       'label' => t('Default label for relationship'),
-      // Description shown within the add relationship handler in the UI.
-      'help' => t('Description of the placeholder field relationship'),
     ],
   ];
 
@@ -549,7 +540,7 @@ function hook_views_data_alter(array &$data) {
  * @see hook_field_views_data_alter()
  * @see hook_field_views_data_views_data_alter()
  */
-function hook_field_views_data(FieldStorageConfigInterface $field_storage): array {
+function hook_field_views_data(\Drupal\field\FieldStorageConfigInterface $field_storage) {
   $data = views_field_default_views_data($field_storage);
   foreach ($data as $table_name => $table_data) {
     // Add the relationship only on the target_id field.
@@ -582,7 +573,7 @@ function hook_field_views_data(FieldStorageConfigInterface $field_storage): arra
  * @see hook_field_views_data()
  * @see hook_field_views_data_views_data_alter()
  */
-function hook_field_views_data_alter(array &$data, FieldStorageConfigInterface $field_storage) {
+function hook_field_views_data_alter(array &$data, \Drupal\field\FieldStorageConfigInterface $field_storage) {
   $entity_type_id = $field_storage->getTargetEntityTypeId();
   $field_name = $field_storage->getName();
   $entity_type = \Drupal::entityTypeManager()->getDefinition($entity_type_id);
@@ -638,7 +629,7 @@ function hook_field_views_data_alter(array &$data, FieldStorageConfigInterface $
  * @see hook_field_views_data_alter()
  * @see views_views_data_alter()
  */
-function hook_field_views_data_views_data_alter(array &$data, FieldStorageConfigInterface $field) {
+function hook_field_views_data_views_data_alter(array &$data, \Drupal\field\FieldStorageConfigInterface $field) {
   $field_name = $field->getName();
   $data_key = 'field_data_' . $field_name;
   $entity_type_id = $field->getTargetEntityTypeId();
@@ -883,7 +874,7 @@ function hook_views_pre_render(ViewExecutable $view) {
 function hook_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
   // When using full pager, disable any time-based caching if there are fewer
   // than 10 results.
-  if ($view->pager instanceof Full && $cache instanceof Time && count($view->result) < 10) {
+  if ($view->pager instanceof Drupal\views\Plugin\views\pager\Full && $cache instanceof Drupal\views\Plugin\views\cache\Time && count($view->result) < 10) {
     $cache->options['results_lifespan'] = 0;
     $cache->options['output_lifespan'] = 0;
   }
@@ -961,7 +952,7 @@ function hook_views_preview_info_alter(array &$rows, ViewExecutable $view) {
  * @see views_invalidate_cache()
  */
 function hook_views_invalidate_cache() {
-  Cache::invalidateTags(['views']);
+  \Drupal\Core\Cache\Cache::invalidateTags(['views']);
 }
 
 /**

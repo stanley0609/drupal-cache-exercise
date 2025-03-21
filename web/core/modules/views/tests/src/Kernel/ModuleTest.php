@@ -322,7 +322,7 @@ class ModuleTest extends ViewsKernelTestBase {
    * @return array
    *   A formatted options array that matches the expected output.
    */
-  protected function formatViewOptions(array $views = []): array {
+  protected function formatViewOptions(array $views = []) {
     $expected_options = [];
     foreach ($views as $view) {
       foreach ($view->get('display') as $display) {

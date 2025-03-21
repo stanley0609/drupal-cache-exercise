@@ -19,9 +19,9 @@ class RandomTest extends TestCase {
   /**
    * The first random string passed to the test callback.
    *
-   * @var string
-   *
    * @see \Drupal\Tests\Component\Utility\RandomTest::_RandomStringValidate()
+   *
+   * @var string
    */
   protected $firstStringGenerated = '';
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\migrate_missing_database_test\Plugin\migrate\source;
 
 use Drupal\Core\Database\Query\SelectInterface;

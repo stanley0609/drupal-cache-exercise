@@ -16,6 +16,7 @@ use Drupal\Tests\TestFileCreationTrait;
  * Tests the file_save_upload() function.
  *
  * @group file
+ * @group #slow
  */
 class SaveUploadTest extends FileManagedTestBase {
 

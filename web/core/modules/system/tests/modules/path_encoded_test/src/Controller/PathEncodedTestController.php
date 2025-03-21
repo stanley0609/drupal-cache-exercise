@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\path_encoded_test\Controller;
 
 use Symfony\Component\HttpFoundation\Response;

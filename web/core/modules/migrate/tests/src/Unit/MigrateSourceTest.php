@@ -451,6 +451,51 @@ class MigrateSourceTest extends MigrateTestCase {
 }
 
 /**
+ * Stubbed source plugin for testing base class implementations.
+ */
+class StubSourcePlugin extends SourcePluginBase {
+
+  /**
+   * Helper for setting internal module handler implementation.
+   *
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
+   */
+  public function setModuleHandler(ModuleHandlerInterface $module_handler) {
+    $this->moduleHandler = $module_handler;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function fields() {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __toString() {
+    return '';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getIds() {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function initializeIterator() {
+    return [];
+  }
+
+}
+
+/**
  * Defines a stubbed source plugin with a generator as iterator.
  *
  * This stub overwrites the $skipCount, $cacheCounts, and $trackChanges
@@ -497,10 +542,15 @@ class StubSourceGeneratorPlugin extends StubSourcePlugin {
   /**
    * {@inheritdoc}
    */
-  protected function initializeIterator(): \Generator {
-    yield 'foo';
-    yield 'bar';
-    yield 'iggy';
+  protected function initializeIterator() {
+    $data = [
+      ['title' => 'foo'],
+      ['title' => 'bar'],
+      ['title' => 'iggy'],
+    ];
+    foreach ($data as $row) {
+      yield $row;
+    }
   }
 
 }

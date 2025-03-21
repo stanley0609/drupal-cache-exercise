@@ -19,9 +19,10 @@ module.exports = {
       .drupalRelativeURL('/node')
       .assert.not.visible(buttonSelector)
       .assert.attributeEquals(buttonSelector, 'aria-checked', 'false')
-      .click('.block-system-powered-by-block .drupal-logo')
-      .assert.visible(buttonSelector)
-      .assert.not.visible('#site-header__inner')
+      .getLocationInView('footer.site-footer', () => {
+        browser.assert.visible(buttonSelector);
+        browser.assert.not.visible('#site-header__inner');
+      })
       .assert.not.visible(mainMenuSelector)
       .click(buttonSelector)
       .assert.visible(mainMenuSelector)

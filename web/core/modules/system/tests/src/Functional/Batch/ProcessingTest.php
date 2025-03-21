@@ -11,6 +11,7 @@ use Drupal\Tests\BrowserTestBase;
  * Tests batch processing in form and non-form workflow.
  *
  * @group Batch
+ * @group #slow
  */
 class ProcessingTest extends BrowserTestBase {
 
@@ -220,7 +221,7 @@ class ProcessingTest extends BrowserTestBase {
   /**
    * Triggers a pass if the texts were found in order in the raw content.
    *
-   * @param array $texts
+   * @param $texts
    *   Array of raw strings to look for.
    *
    * @internal

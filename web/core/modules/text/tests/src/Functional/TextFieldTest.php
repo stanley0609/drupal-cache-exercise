@@ -17,6 +17,7 @@ use Drupal\Tests\TestFileCreationTrait;
  * Tests the creation of text fields.
  *
  * @group text
+ * @group #slow
  */
 class TextFieldTest extends StringFieldTest {
 
@@ -307,7 +308,7 @@ class TextFieldTest extends StringFieldTest {
   /**
    * Helper function for testTextfieldWidgetsFormatted().
    */
-  public function _testTextfieldWidgetsFormatted($field_type, $widget_type): void {
+  public function _testTextfieldWidgetsFormatted($field_type, $widget_type) {
     // Create a field.
     $field_name = $this->randomMachineName();
     $field_storage = FieldStorageConfig::create([

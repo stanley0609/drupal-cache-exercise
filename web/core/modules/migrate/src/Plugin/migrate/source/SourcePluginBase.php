@@ -30,7 +30,7 @@ use Drupal\migrate\Row;
  *     \Drupal\migrate\Plugin\MigrateIdMapInterface::STATUS_NEEDS_UPDATE.
  * - The row needs an update.
  *   - Rows can be marked by custom or contrib modules using the
- *     \Drupal\migrate\Plugin\MigrateIdMapInterface::prepareUpdate() or
+ *     \Drupal\migrate\Plugin\MigrateIdMapInterface::prepareUpdate() os
  *     \Drupal\migrate\Plugin\MigrateIdMapInterface::setUpdate()
  *     methods.
  * - The row is above the high-water mark.
@@ -97,9 +97,9 @@ use Drupal\migrate\Row;
  * source:
  *   plugin: some_source_plugin_name
  *   constants:
- *     foo: bar
+ *     - foo: bar
  * process:
- *   baz: constants/foo
+ *   baz: constants/bar
  * @endcode
  *
  * In this example, the constant 'foo' is defined with a value of 'bar'. It is
@@ -343,7 +343,8 @@ abstract class SourcePluginBase extends PluginBase implements MigrateSourceInter
   /**
    * {@inheritdoc}
    */
-  public function current(): mixed {
+  #[\ReturnTypeWillChange]
+  public function current() {
     return $this->currentRow;
   }
 
@@ -355,7 +356,8 @@ abstract class SourcePluginBase extends PluginBase implements MigrateSourceInter
    * serialize to fulfill the requirement, but using getCurrentIds() is
    * preferable.
    */
-  public function key(): mixed {
+  #[\ReturnTypeWillChange]
+  public function key() {
     return serialize($this->currentSourceIds);
   }
 
@@ -365,7 +367,8 @@ abstract class SourcePluginBase extends PluginBase implements MigrateSourceInter
    * Implementation of \Iterator::valid() - called at the top of the loop,
    * returning TRUE to process the loop and FALSE to terminate it.
    */
-  public function valid(): bool {
+  #[\ReturnTypeWillChange]
+  public function valid() {
     return isset($this->currentRow);
   }
 
@@ -376,7 +379,8 @@ abstract class SourcePluginBase extends PluginBase implements MigrateSourceInter
    * should implement initializeIterator() to do any class-specific setup for
    * iterating source records.
    */
-  public function rewind(): void {
+  #[\ReturnTypeWillChange]
+  public function rewind() {
     $this->getIterator()->rewind();
     $this->next();
   }
@@ -384,7 +388,8 @@ abstract class SourcePluginBase extends PluginBase implements MigrateSourceInter
   /**
    * {@inheritdoc}
    */
-  public function next(): void {
+  #[\ReturnTypeWillChange]
+  public function next() {
     $this->currentSourceIds = NULL;
     $this->currentRow = NULL;
 
@@ -487,7 +492,8 @@ abstract class SourcePluginBase extends PluginBase implements MigrateSourceInter
    * @return int
    *   The count.
    */
-  public function count($refresh = FALSE): int {
+  #[\ReturnTypeWillChange]
+  public function count($refresh = FALSE) {
     if ($this->skipCount) {
       return MigrateSourceInterface::NOT_COUNTABLE;
     }

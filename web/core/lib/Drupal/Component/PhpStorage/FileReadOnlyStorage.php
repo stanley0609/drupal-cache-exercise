@@ -17,7 +17,7 @@ class FileReadOnlyStorage implements PhpStorageInterface {
   /**
    * Constructs this FileStorage object.
    *
-   * @param string[] $configuration
+   * @param $configuration
    *   An associative array, containing at least two keys (the rest are ignored):
    *   - directory: The directory where the files should be stored.
    *   - bin: The storage bin. Multiple storage objects can be instantiated with
@@ -63,6 +63,14 @@ class FileReadOnlyStorage implements PhpStorageInterface {
    */
   public function getFullPath($name) {
     return $this->directory . '/' . $name;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function writeable() {
+    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.1.0 and will be removed from drupal:11.0.0. There is no replacement. See https://www.drupal.org/node/3155413', E_USER_DEPRECATED);
+    return FALSE;
   }
 
   /**

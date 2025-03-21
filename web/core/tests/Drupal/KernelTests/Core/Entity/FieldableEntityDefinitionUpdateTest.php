@@ -16,6 +16,7 @@ use Drupal\Tests\system\Functional\Entity\Traits\EntityDefinitionTestTrait;
  * @coversDefaultClass \Drupal\Core\Entity\EntityDefinitionUpdateManager
  *
  * @group Entity
+ * @group #slow
  */
 class FieldableEntityDefinitionUpdateTest extends EntityKernelTestBase {
 
@@ -132,7 +133,7 @@ class FieldableEntityDefinitionUpdateTest extends EntityKernelTestBase {
    * @param bool $translatable
    *   Whether the entity type is translatable or not.
    */
-  protected function insertData($revisionable, $translatable): void {
+  protected function insertData($revisionable, $translatable) {
     // Add three test entities in order to make the "data copy" step run at
     // least three times.
     /** @var \Drupal\Core\Entity\TranslatableRevisionableStorageInterface|\Drupal\Core\Entity\EntityStorageInterface $storage */

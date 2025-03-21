@@ -33,7 +33,7 @@ class FormState implements FormStateInterface {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $complete_form;
 
   /**
@@ -66,7 +66,7 @@ class FormState implements FormStateInterface {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $build_info = [
     'args' => [],
     'files' => [],
@@ -81,7 +81,7 @@ class FormState implements FormStateInterface {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $rebuild_info = [];
 
   /**
@@ -103,9 +103,9 @@ class FormState implements FormStateInterface {
    *
    * This property is uncacheable.
    *
-   * @var bool
-   *
    * @see self::setRebuild()
+   *
+   * @var bool
    */
   protected $rebuild = FALSE;
 
@@ -118,9 +118,9 @@ class FormState implements FormStateInterface {
    *
    * This property is uncacheable.
    *
-   * @var bool
-   *
    * @see self::setInvalidToken()
+   *
+   * @var bool
    */
   protected $invalidToken = FALSE;
 
@@ -149,11 +149,11 @@ class FormState implements FormStateInterface {
   /**
    * Used to redirect the form on submission.
    *
+   * @see self::getRedirect()
+   *
    * This property is uncacheable.
    *
    * @var \Drupal\Core\Url|\Symfony\Component\HttpFoundation\RedirectResponse|null
-   *
-   * @see self::getRedirect()
    */
   protected $redirect;
 
@@ -166,7 +166,7 @@ class FormState implements FormStateInterface {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $no_redirect;
 
   /**
@@ -225,7 +225,7 @@ class FormState implements FormStateInterface {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $no_cache;
 
   /**
@@ -284,7 +284,7 @@ class FormState implements FormStateInterface {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $always_process;
 
   /**
@@ -299,7 +299,7 @@ class FormState implements FormStateInterface {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $must_validate;
 
   /**
@@ -323,7 +323,7 @@ class FormState implements FormStateInterface {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $programmed_bypass_access_check = TRUE;
 
   /**
@@ -336,7 +336,7 @@ class FormState implements FormStateInterface {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $process_input;
 
   /**
@@ -368,7 +368,7 @@ class FormState implements FormStateInterface {
    *
    * @var array|null
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $triggering_element;
 
   /**
@@ -379,7 +379,7 @@ class FormState implements FormStateInterface {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $has_file_element;
 
   /**
@@ -447,7 +447,7 @@ class FormState implements FormStateInterface {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $validation_complete = FALSE;
 
   /**
@@ -473,7 +473,7 @@ class FormState implements FormStateInterface {
    *
    * @var array|null
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $limit_validation_errors;
 
   /**
@@ -483,7 +483,7 @@ class FormState implements FormStateInterface {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $validate_handlers = [];
 
   /**
@@ -493,7 +493,7 @@ class FormState implements FormStateInterface {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $submit_handlers = [];
 
   /**
@@ -662,7 +662,7 @@ class FormState implements FormStateInterface {
    * @return bool
    *
    * @see \Symfony\Component\HttpFoundation\Request::isMethodSafe()
-   * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.1.1
+   * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.1.1
    */
   protected function isRequestMethodSafe() {
     return in_array($this->requestMethod, ['GET', 'HEAD']);

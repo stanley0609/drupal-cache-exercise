@@ -20,7 +20,6 @@ use Drupal\Tests\rest\Functional\EntityResource\ConfigEntityResourceTestBase;
  * Additionally, every entity type must have the correct parent test class.
  *
  * @group rest
- * @group #slow
  */
 class EntityResourceRestTestCoverageTest extends KernelTestBase {
 

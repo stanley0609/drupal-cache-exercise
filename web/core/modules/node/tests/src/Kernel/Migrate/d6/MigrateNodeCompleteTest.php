@@ -118,7 +118,7 @@ class MigrateNodeCompleteTest extends MigrateNodeTestBase {
    * @return array
    *   The expected table rows.
    */
-  protected function expectedNodeFieldDataTable(): array {
+  protected function expectedNodeFieldDataTable() {
     return [
       0 =>
         [
@@ -525,7 +525,7 @@ class MigrateNodeCompleteTest extends MigrateNodeTestBase {
    * @return array
    *   The table.
    */
-  protected function expectedNodeFieldRevisionTable(): array {
+  protected function expectedNodeFieldRevisionTable() {
     return [
       0 =>
         [
@@ -1046,9 +1046,9 @@ class MigrateNodeCompleteTest extends MigrateNodeTestBase {
    * @return array
    *   Selected properties and fields on the revision.
    */
-  protected function expectedRevisionEntityData(): array {
+  protected function expectedRevisionEntityData() {
     return [
-      [
+      $revision_data = [
         // Node 1, revision 1, und.
         0 =>
           [

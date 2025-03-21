@@ -16,6 +16,7 @@ use Drupal\user\UserInterface;
  * Ensure that password reset methods work as expected.
  *
  * @group user
+ * @group #slow
  */
 class UserPasswordResetTest extends BrowserTestBase {
 
@@ -122,11 +123,11 @@ class UserPasswordResetTest extends BrowserTestBase {
     // Ensure that the current URL does not contain the hash and timestamp.
     $this->assertSession()->addressEquals(Url::fromRoute('user.reset.form', ['uid' => $this->account->id()]));
 
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Cache', 'UNCACHEABLE (request policy)');
+    $this->assertSession()->responseHeaderDoesNotExist('X-Drupal-Cache');
 
     // Ensure the password reset URL is not cached.
     $this->drupalGet($resetURL);
-    $this->assertSession()->responseHeaderEquals('X-Drupal-Cache', 'UNCACHEABLE (request policy)');
+    $this->assertSession()->responseHeaderDoesNotExist('X-Drupal-Cache');
 
     // Check the one-time login page.
     $this->assertSession()->pageTextContains($this->account->getAccountName());
@@ -137,10 +138,6 @@ class UserPasswordResetTest extends BrowserTestBase {
     $this->submitForm([], 'Log in');
     $this->assertSession()->linkExists('Log out');
     $this->assertSession()->titleEquals($this->account->getAccountName() . ' | Drupal');
-
-    // Try to save without entering password.
-    $this->submitForm([], 'Save');
-    $this->assertSession()->pageTextContains('Password field is required.');
 
     // Change the forgotten password.
     $password = \Drupal::service('password_generator')->generate();

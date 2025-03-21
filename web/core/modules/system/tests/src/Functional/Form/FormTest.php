@@ -20,6 +20,7 @@ use Behat\Mink\Element\NodeElement;
  * Tests various form element validation mechanisms.
  *
  * @group Form
+ * @group #slow
  */
 class FormTest extends BrowserTestBase {
 
@@ -589,7 +590,7 @@ class FormTest extends BrowserTestBase {
    * @param string[] $order
    *   Expected order of its options.
    */
-  protected function validateSelectSorting($select, array $order): void {
+  protected function validateSelectSorting($select, array $order) {
     $option_map_function = function (NodeElement $node) {
       return ($node->getTagName() === 'optgroup') ?
         $node->getAttribute('label') : $node->getValue();

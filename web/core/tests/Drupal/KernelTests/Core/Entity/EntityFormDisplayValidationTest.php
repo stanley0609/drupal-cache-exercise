@@ -113,7 +113,6 @@ class EntityFormDisplayValidationTest extends ConfigEntityValidationTestBase {
    */
   public function testImmutableProperties(array $valid_values = []): void {
     parent::testImmutableProperties([
-      'id' => 'entity_test_with_bundle.two.default',
       'targetEntityType' => 'entity_test_with_bundle',
       'bundle' => 'two',
     ]);

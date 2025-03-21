@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\views\Tests;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\views\Plugin\views\field\EntityField;
 
 /**
@@ -125,7 +124,10 @@ trait ViewResultAssertionTrait {
     // Do the actual comparison.
     if (!isset($message)) {
       $not = (strpos($assert_method, 'Not') ? 'not' : '');
-      $message = sprintf("Actual result <pre>\n%s\n</pre> is $not identical to expected <pre>\n%s\n</pre>", var_export($result, TRUE), var_export($expected_result, TRUE));
+      $message = new FormattableMarkup("Actual result <pre>\n@actual\n</pre> is $not identical to expected <pre>\n@expected\n</pre>", [
+        '@actual' => var_export($result, TRUE),
+        '@expected' => var_export($expected_result, TRUE),
+      ]);
     }
 
     switch ($assert_method) {

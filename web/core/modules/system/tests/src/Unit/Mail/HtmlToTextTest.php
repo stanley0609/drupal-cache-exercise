@@ -28,7 +28,7 @@ class HtmlToTextTest extends UnitTestCase {
   /**
    * Converts a string to its PHP source equivalent for display in test messages.
    *
-   * @param string $text
+   * @param $text
    *   The text string to convert.
    *
    * @return string

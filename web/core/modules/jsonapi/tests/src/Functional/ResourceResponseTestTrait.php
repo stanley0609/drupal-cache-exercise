@@ -218,7 +218,7 @@ trait ResourceResponseTestTrait {
    * @return \Drupal\jsonapi\ResourceResponse[]
    *   The ResourceResponses.
    */
-  protected static function toResourceResponses(array $responses): array {
+  protected static function toResourceResponses(array $responses) {
     return array_map([self::class, 'toResourceResponse'], $responses);
   }
 
@@ -244,7 +244,7 @@ trait ResourceResponseTestTrait {
       $cacheability->addCacheContexts(explode(' ', $response->getHeader('X-Drupal-Cache-Contexts')[0]));
     }
     if ($dynamic_cache = $response->getHeader('X-Drupal-Dynamic-Cache')) {
-      $cacheability->setCacheMaxAge((str_contains($dynamic_cache[0], 'UNCACHEABLE') && $response->getStatusCode() < 400) ? 0 : Cache::PERMANENT);
+      $cacheability->setCacheMaxAge(($dynamic_cache[0] === 'UNCACHEABLE' && $response->getStatusCode() < 400) ? 0 : Cache::PERMANENT);
     }
     $related_document = Json::decode($response->getBody());
     $resource_response = new CacheableResourceResponse($related_document, $response->getStatusCode());
@@ -260,7 +260,7 @@ trait ResourceResponseTestTrait {
    * @return array
    *   A resource identifier for the given entity.
    */
-  protected static function toResourceIdentifier(EntityInterface $entity): array {
+  protected static function toResourceIdentifier(EntityInterface $entity) {
     return [
       'type' => $entity->getEntityTypeId() . '--' . $entity->bundle(),
       'id' => $entity->uuid(),
@@ -276,7 +276,7 @@ trait ResourceResponseTestTrait {
    * @return bool
    *   TRUE if the array has a type and ID, FALSE otherwise.
    */
-  protected static function isResourceIdentifier(array $data): bool {
+  protected static function isResourceIdentifier(array $data) {
     return array_key_exists('type', $data) && array_key_exists('id', $data);
   }
 
@@ -306,7 +306,7 @@ trait ResourceResponseTestTrait {
    * @return bool
    *   TRUE if the needle exists is present in the haystack, FALSE otherwise.
    */
-  protected static function collectionHasResourceIdentifier(array $needle, array $haystack): bool {
+  protected static function collectionHasResourceIdentifier(array $needle, array $haystack) {
     foreach ($haystack as $resource) {
       if ($resource['type'] == $needle['type'] && $resource['id'] == $needle['id']) {
         return TRUE;
@@ -346,7 +346,7 @@ trait ResourceResponseTestTrait {
    * @return array
    *   The extracted links, keyed by the original associated key name.
    */
-  protected static function extractLinks(array $link_paths, array $document): array {
+  protected static function extractLinks(array $link_paths, array $document) {
     return array_map(function ($link_path) use ($document) {
       $link = array_reduce(
         explode('.', $link_path),
@@ -366,7 +366,7 @@ trait ResourceResponseTestTrait {
    * @return string[]
    *   The resource links.
    */
-  protected static function getResourceLinks(array $resource_identifiers): array {
+  protected static function getResourceLinks(array $resource_identifiers) {
     return array_map([static::class, 'getResourceLink'], $resource_identifiers);
   }
 
@@ -398,7 +398,7 @@ trait ResourceResponseTestTrait {
    * @return string
    *   The relationship link.
    */
-  protected static function getRelationshipLink(array $resource_identifier, $relationship_field_name): string {
+  protected static function getRelationshipLink(array $resource_identifier, $relationship_field_name) {
     return static::getResourceLink($resource_identifier) . "/relationships/$relationship_field_name";
   }
 
@@ -413,7 +413,7 @@ trait ResourceResponseTestTrait {
    * @return string
    *   The related resource link.
    */
-  protected static function getRelatedLink(array $resource_identifier, $relationship_field_name): string {
+  protected static function getRelatedLink(array $resource_identifier, $relationship_field_name) {
     return static::getResourceLink($resource_identifier) . "/$relationship_field_name";
   }
 
@@ -585,7 +585,7 @@ trait ResourceResponseTestTrait {
    * @return array
    *   A new omitted object.
    */
-  protected static function errorsToOmittedObject(array $errors): array {
+  protected static function errorsToOmittedObject(array $errors) {
     $omitted = [
       'detail' => 'Some resources have been omitted because of insufficient authorization.',
       'links' => [

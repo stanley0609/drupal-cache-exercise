@@ -24,7 +24,6 @@ use Symfony\Component\Routing\RouteCollection;
  * @coversDefaultClass \Drupal\layout_builder\Plugin\SectionStorage\OverridesSectionStorage
  *
  * @group layout_builder
- * @group #slow
  */
 class OverridesSectionStorageTest extends UnitTestCase {
 

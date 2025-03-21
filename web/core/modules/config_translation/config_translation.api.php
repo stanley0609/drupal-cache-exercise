@@ -44,7 +44,7 @@ function hook_config_translation_info(&$info) {
       try {
         $base_route = $route_provider->getRouteByName('entity.field_config.' . $entity_type_id . '_field_edit_form');
       }
-      catch (RouteNotFoundException) {
+      catch (RouteNotFoundException $e) {
         // Ignore non-existent routes.
       }
 

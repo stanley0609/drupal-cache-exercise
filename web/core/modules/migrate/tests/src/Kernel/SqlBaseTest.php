@@ -240,7 +240,7 @@ class TestSqlBase extends SqlBase {
    * @param array $config
    *   The config array.
    */
-  public function setConfiguration($config): void {
+  public function setConfiguration($config) {
     $this->configuration = $config;
   }
 
@@ -271,7 +271,7 @@ class TestSqlBase extends SqlBase {
    * @param \Drupal\Core\Database\Query\SelectInterface $query
    *   The query to execute.
    */
-  public function setQuery(SelectInterface $query): void {
+  public function setQuery(SelectInterface $query) {
     $this->query = $query;
   }
 

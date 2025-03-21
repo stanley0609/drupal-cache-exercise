@@ -13,6 +13,7 @@ use Drupal\Core\Url;
  * connecting to the release history server, clearing the disk cache, and more.
  *
  * @group update
+ * @group #slow
  */
 class UpdateSemverCoreTest extends UpdateSemverCoreTestBase {
 

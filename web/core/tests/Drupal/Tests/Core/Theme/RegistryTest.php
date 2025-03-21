@@ -9,7 +9,6 @@ use Drupal\Core\Theme\ActiveTheme;
 use Drupal\Core\Theme\Registry;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Drupal\theme_test\Hook\ThemeTestHooks;
 
 /**
  * @coversDefaultClass \Drupal\Core\Theme\Registry
@@ -156,11 +155,6 @@ class RegistryTest extends UnitTestCase {
     // Include the module and theme files so that hook_theme can be called.
     include_once $this->root . '/core/modules/system/tests/modules/theme_test/theme_test.module';
     include_once $this->root . '/core/tests/fixtures/test_stable/test_stable.theme';
-    $themeTestTheme = new ThemeTestHooks();
-    $this->moduleHandler->expects($this->atLeastOnce())
-      ->method('invoke')
-      ->with('theme_test', 'theme')
-      ->willReturn($themeTestTheme->theme(NULL, NULL, NULL, NULL));
     $this->moduleHandler->expects($this->atLeastOnce())
       ->method('invokeAllWith')
       ->with('theme')

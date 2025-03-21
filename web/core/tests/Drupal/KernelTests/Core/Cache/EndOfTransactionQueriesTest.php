@@ -15,8 +15,6 @@ use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\Reference;
 use Drupal\Component\Serialization\PhpSerialize;
 
-// cspell:ignore pretransaction
-
 /**
  * Tests delaying of cache tag invalidation queries to the end of transactions.
  *
@@ -50,7 +48,7 @@ class EndOfTransactionQueriesTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public function register(ContainerBuilder $container): void {
+  public function register(ContainerBuilder $container) {
     parent::register($container);
 
     $container->register('serializer', PhpSerialize::class);
@@ -154,13 +152,13 @@ class EndOfTransactionQueriesTest extends KernelTestBase {
    *
    * @param string[] $statements
    *   A list of query statements.
-   * @param string $table_name
+   * @param $table_name
    *   The name of the table to filter by.
    *
    * @return string[]
    *   Filtered statement list.
    */
-  protected function getStatementsForTable(array $statements, $table_name): array {
+  protected function getStatementsForTable(array $statements, $table_name) {
     return array_filter($statements, function ($statement) use ($table_name) {
       return $this->isStatementRelatedToTable($statement, $table_name);
     });

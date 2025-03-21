@@ -391,7 +391,7 @@ class SelectComplexTest extends DatabaseTestBase {
       $result->rowCount();
       $exception = FALSE;
     }
-    catch (RowCountException) {
+    catch (RowCountException $e) {
       $exception = TRUE;
     }
     $this->assertTrue($exception, 'Exception was thrown');

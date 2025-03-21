@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\batch_test\Controller;
 
 use Drupal\Core\Batch\BatchBuilder;

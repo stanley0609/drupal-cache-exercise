@@ -44,6 +44,7 @@ class NewDefaultThemeBlocksTest extends KernelTestBase {
     parent::setUp();
 
     $this->installConfig(['system']);
+    /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
     $this->themeInstaller = $this->container->get('theme_installer');
     $this->defaultTheme = $this->config('system.theme')->get('default');
   }
@@ -102,7 +103,7 @@ class NewDefaultThemeBlocksTest extends KernelTestBase {
     $this->assertEmpty($new_blocks);
 
     // Install a hidden base theme and ensure blocks are not copied.
-    $base_theme = 'test_base_theme';
+    $base_theme = 'test_basetheme';
     $theme_installer->install([$base_theme]);
     $new_blocks = $block_storage->getQuery()
       ->accessCheck(FALSE)
@@ -170,7 +171,7 @@ class NewDefaultThemeBlocksTest extends KernelTestBase {
     $this->assertEmpty($new_blocks);
 
     // Install a hidden base theme and ensure blocks are not copied.
-    $base_theme = 'test_base_theme';
+    $base_theme = 'test_basetheme';
     $theme_installer->install([$base_theme]);
     $new_blocks = $block_storage->getQuery()
       ->accessCheck(FALSE)

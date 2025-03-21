@@ -273,7 +273,7 @@ class EntityReferenceFieldTest extends EntityKernelTestBase {
       });
       $this->fail($message);
     }
-    catch (\InvalidArgumentException) {
+    catch (\InvalidArgumentException $e) {
       // Expected exception; just continue testing.
     }
     $this->assertUserAutocreate($entity, function (EntityInterface $entity, UserInterface $user) {
@@ -307,7 +307,7 @@ class EntityReferenceFieldTest extends EntityKernelTestBase {
       });
       $this->fail($message);
     }
-    catch (\InvalidArgumentException) {
+    catch (\InvalidArgumentException $e) {
       // Expected exception; just continue testing.
     }
     $this->assertUserRoleAutocreate($entity, function (EntityInterface $entity, RoleInterface $role) {
@@ -424,7 +424,7 @@ class EntityReferenceFieldTest extends EntityKernelTestBase {
         ->create(['name' => $this->randomString()]);
       $entity->target_reference = $target_id;
     }
-    catch (EntityStorageException) {
+    catch (EntityStorageException $e) {
       $this->fail($message);
     }
 
@@ -435,7 +435,7 @@ class EntityReferenceFieldTest extends EntityKernelTestBase {
       $storage->load($target_id);
       $this->fail($message);
     }
-    catch (EntityStorageException) {
+    catch (EntityStorageException $e) {
       // Expected exception; just continue testing.
     }
   }

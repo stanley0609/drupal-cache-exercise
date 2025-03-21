@@ -169,9 +169,6 @@ class RouteProvider implements CacheableRouteProviderInterface, PreloadableRoute
     if ($cached = $this->cache->get($cid)) {
       $this->currentPath->setPath($cached->data['path'], $request);
       $request->query->replace($cached->data['query']);
-      if ($cached->data['routes'] === FALSE) {
-        return new RouteCollection();
-      }
       return $cached->data['routes'];
     }
     else {
@@ -186,7 +183,7 @@ class RouteProvider implements CacheableRouteProviderInterface, PreloadableRoute
       $cache_value = [
         'path' => $path,
         'query' => $query_parameters,
-        'routes' => $routes->count() === 0 ? FALSE : $routes,
+        'routes' => $routes,
       ];
       $this->cache->set($cid, $cache_value, CacheBackendInterface::CACHE_PERMANENT, ['route_match']);
       return $routes;
@@ -236,7 +233,7 @@ class RouteProvider implements CacheableRouteProviderInterface, PreloadableRoute
 
           $this->cache->set($cid, $routes, Cache::PERMANENT, ['routes']);
         }
-        catch (\Exception) {
+        catch (\Exception $e) {
           $routes = [];
         }
       }
@@ -373,7 +370,7 @@ class RouteProvider implements CacheableRouteProviderInterface, PreloadableRoute
       ])
         ->fetchAll(\PDO::FETCH_ASSOC);
     }
-    catch (\Exception) {
+    catch (\Exception $e) {
       $routes = [];
     }
 

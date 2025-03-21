@@ -82,7 +82,7 @@ abstract class BlockResourceTestBase extends ConfigEntityResourceTestBase {
     $normalization = [
       'uuid' => $this->entity->uuid(),
       'id' => 'llama',
-      'weight' => 0,
+      'weight' => NULL,
       'langcode' => 'en',
       'status' => TRUE,
       'dependencies' => [

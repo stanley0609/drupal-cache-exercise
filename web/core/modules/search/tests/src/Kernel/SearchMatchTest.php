@@ -50,7 +50,7 @@ class SearchMatchTest extends KernelTestBase {
   /**
    * Set up a small index of items to test against.
    */
-  public function _setup(): void {
+  public function _setup() {
     $this->config('search.settings')->set('index.minimum_word_size', 3)->save();
 
     $search_index = \Drupal::service('search.index');
@@ -106,7 +106,7 @@ class SearchMatchTest extends KernelTestBase {
   /**
    * Run predefine queries looking for indexed terms.
    */
-  public function _testQueries(): void {
+  public function _testQueries() {
     // Note: OR queries that include short words in OR groups are only accepted
     // if the ORed terms are ANDed with at least one long word in the rest of
     // the query. Examples:
@@ -225,7 +225,7 @@ class SearchMatchTest extends KernelTestBase {
    *
    * Verify if a query produces the correct results.
    */
-  public function _testQueryMatching($query, $set, $results): void {
+  public function _testQueryMatching($query, $set, $results) {
     // Get result IDs.
     $found = [];
     foreach ($set as $item) {
@@ -243,7 +243,7 @@ class SearchMatchTest extends KernelTestBase {
    *
    * Verify if a query produces normalized, monotonous scores.
    */
-  public function _testQueryScores($query, $set, $results): void {
+  public function _testQueryScores($query, $set, $results) {
     // Get result scores.
     $scores = [];
     foreach ($set as $item) {

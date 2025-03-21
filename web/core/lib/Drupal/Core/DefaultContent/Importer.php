@@ -18,7 +18,6 @@ use Drupal\link\Plugin\Field\FieldType\LinkItem;
 use Drupal\user\EntityOwnerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * A service for handling import of content.
@@ -46,7 +45,6 @@ final class Importer implements LoggerAwareInterface {
     private readonly FileSystemInterface $fileSystem,
     private readonly LanguageManagerInterface $languageManager,
     private readonly EntityRepositoryInterface $entityRepository,
-    private readonly EventDispatcherInterface $eventDispatcher,
   ) {}
 
   /**
@@ -72,9 +70,6 @@ final class Importer implements LoggerAwareInterface {
       return;
     }
 
-    $event = new PreImportEvent($content, $existing);
-    $skip = $this->eventDispatcher->dispatch($event)->getSkipList();
-
     $account = $this->accountSwitcher->switchToAdministrator();
 
     try {
@@ -84,19 +79,6 @@ final class Importer implements LoggerAwareInterface {
         assert(is_string($uuid));
         assert(is_string($entity_type_id));
         assert(is_string($path));
-
-        // The event subscribers asked to skip importing this entity. If they
-        // explained why, log that.
-        if (array_key_exists($uuid, $skip)) {
-          if ($skip[$uuid]) {
-            $this->logger?->info('Skipped importing @entity_type @uuid because: %reason', [
-              '@entity_type' => $entity_type_id,
-              '@uuid' => $uuid,
-              '%reason' => $skip[$uuid],
-            ]);
-          }
-          continue;
-        }
 
         $entity_type = $this->entityTypeManager->getDefinition($entity_type_id);
         /** @var \Drupal\Core\Entity\EntityTypeInterface $entity_type */

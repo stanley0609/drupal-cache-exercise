@@ -46,7 +46,7 @@ class MediaSourceOEmbedVideoTest extends MediaSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function initConfig(ContainerInterface $container): void {
+  protected function initConfig(ContainerInterface $container) {
     parent::initConfig($container);
 
     // Enable twig debugging to make testing template usage easy.

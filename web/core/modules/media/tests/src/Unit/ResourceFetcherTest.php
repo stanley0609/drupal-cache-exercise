@@ -37,17 +37,15 @@ class ResourceFetcherTest extends UnitTestCase {
     ]);
     $response = new Response(200, $headers, $body);
 
-    $non_default_timeout = 10;
     $client = $this->prophesize(Client::class);
-    $client->request('GET', $url, [RequestOptions::TIMEOUT => $non_default_timeout])
+    $client->request('GET', $url, [RequestOptions::TIMEOUT => 5])
       ->shouldBeCalled()
       ->willReturn($response);
 
     $fetcher = new ResourceFetcher(
       $client->reveal(),
       $this->createMock('\Drupal\media\OEmbed\ProviderRepositoryInterface'),
-      new NullBackend('default'),
-      $non_default_timeout
+      new NullBackend('default')
     );
     $fetcher->fetchResource($url);
   }

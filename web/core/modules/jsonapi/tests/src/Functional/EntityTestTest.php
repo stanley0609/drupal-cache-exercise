@@ -14,6 +14,7 @@ use Drupal\user\Entity\User;
  * JSON:API integration test for the "EntityTest" content entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
 class EntityTestTest extends ResourceTestBase {
 
@@ -52,7 +53,7 @@ class EntityTestTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method): void {
+  protected function setUpAuthorization($method) {
     switch ($method) {
       case 'GET':
         $this->grantPermissionsToTestedRole(['view test entity']);
@@ -100,7 +101,7 @@ class EntityTestTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument(): array {
+  protected function getExpectedDocument() {
     $self_url = Url::fromUri('base:/jsonapi/entity_test/entity_test/' . $this->entity->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
     $author = User::load(0);
     return [
@@ -151,7 +152,7 @@ class EntityTestTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument(): array {
+  protected function getPostDocument() {
     return [
       'data' => [
         'type' => 'entity_test--entity_test',
@@ -181,7 +182,7 @@ class EntityTestTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getSparseFieldSets(): array {
+  protected function getSparseFieldSets() {
     // EntityTest's owner field name is `user_id`, not `uid`, which breaks
     // nested sparse fieldset tests.
     return array_diff_key(parent::getSparseFieldSets(), array_flip([
