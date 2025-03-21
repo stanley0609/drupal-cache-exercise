@@ -4,6 +4,7 @@ namespace Drupal\cache_exercise\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 
@@ -25,6 +26,13 @@ class LatestArticlesBlock extends BlockBase implements ContainerFactoryPluginInt
   protected $entityTypeManager;
 
   /**
+   * The current user service.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
    * Constructs a new LatestArticlesBlock.
    *
    * @param array $configuration
@@ -35,10 +43,13 @@ class LatestArticlesBlock extends BlockBase implements ContainerFactoryPluginInt
    *   The plugin implementation definition.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
+   * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+   *   The current user service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entityTypeManager, AccountProxyInterface $currentUser) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->entityTypeManager = $entity_type_manager;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->currentUser = $currentUser;
   }
 
   /**
@@ -49,7 +60,8 @@ class LatestArticlesBlock extends BlockBase implements ContainerFactoryPluginInt
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('current_user')
     );
   }
 
@@ -65,24 +77,30 @@ class LatestArticlesBlock extends BlockBase implements ContainerFactoryPluginInt
       ->sort('created', 'DESC')
       ->range(0, 3)
       ->accessCheck(TRUE);
+
     $nids = $query->execute();
-    // var_dump($nids);
-    $titles = [];
+
+    $items = [];
     if (!empty($nids)) {
       $nodes = $storage->loadMultiple($nids);
       foreach ($nodes as $node) {
-        $titles[] = $node->toLink()->toString();
+        $items[] = $node->toLink()->toString();
       }
+    }
+
+    // Add user email only if the user is authenticated
+    if ($this->currentUser->isAuthenticated()) {
+      $user_email = $this->currentUser->getEmail();
+      $items[] = "User Email: $user_email";
     }
 
     return [
       '#theme' => 'item_list',
-      '#items' => $titles,
+      '#items' => $items,
       '#cache' => [
-        // 'tags' => array_map(fn($nid) => "node:$nid", $nids),
-        'tags' => array_merge(array_map(fn($nid) => "node:$nid", $nids), ['node_list']),
+        'tags' => array_map(fn($nid) => "node:$nid", $nids),
+        'contexts' => ['user'],
       ],
     ];
   }
-
 }
